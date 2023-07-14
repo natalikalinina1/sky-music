@@ -1,17 +1,19 @@
-import './App.css';
+import './style/App.css';
+import  Mainbar  from './components/Mainbar';
+import  Bar  from './components/Bar';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-      
-        <p className="start">
-        Здесь скоро будет Skypro.Music
-        </p>
-       
-      </header>
+    <div className="wrapper">
+    <div className="container">
+     <Mainbar/>
+     <Bar/>
     </div>
+</div>
+
   );
 }
 
 export default App;
+
