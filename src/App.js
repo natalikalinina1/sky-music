@@ -1,19 +1,12 @@
-import './style/App.css';
-import  Mainbar  from './components/Mainbar';
-import  Bar  from './components/Bar';
-
+import "./style/App.css";
+import Main from "./pages/Main";
 
 function App() {
   return (
-    <div className="wrapper">
-    <div className="container">
-     <Mainbar/>
-     <Bar/>
+    <div className="App">
+      <Main />
     </div>
-</div>
-
   );
 }
 
 export default App;
-

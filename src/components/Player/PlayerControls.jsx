@@ -1,8 +1,8 @@
-import PrevBtn from "../playerBtns/PrevBtn";
-import PlayBtn from "../playerBtns/PlayBtn";
-import NextBtn from "../playerBtns/NextBtn";
-import RepeatBtn from "../playerBtns/RepeatBtn";
-import ShuffleBtn from "../playerBtns/ShuffleBtn";
+import PrevBtn from "./PlayerBtns/PrevBtn";
+import PlayBtn from "./PlayerBtns/PlayBtn";
+import NextBtn from "./PlayerBtns/NextBtn";
+import RepeatBtn from "./PlayerBtns/RepeatBtn";
+import ShuffleBtn from "./PlayerBtns/ShuffleBtn";
 
 function PlayerControls() {
   return (
