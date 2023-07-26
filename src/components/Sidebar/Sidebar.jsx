@@ -1,14 +1,15 @@
 import SidebarList from './SidebarList'
+import * as S from '../style/style'
 
 function Sidebar() {
     return (
-        <div className="main__sidebar sidebar">
-            <div className="sidebar__personal">
-                <p className="sidebar__personal-name">Sergey.Ivanov</p>
-                <div className="sidebar__avatar"></div>
-            </div>
+        <S.Sidebar>
+            <S.SidebarPersonal>
+                <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+                <S.SidebarAvatar></S.SidebarAvatar>
+            </S.SidebarPersonal>
             <SidebarList />
-        </div>
+        </S.Sidebar>
     )
 }
 

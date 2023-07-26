@@ -1,12 +1,13 @@
+import * as S from '../style/style'
 
 function SidebarItem({ img }) {
-  return (
-      <div className="sidebar__item">
-          <a className="sidebar__link" href="/">
-              <img className="sidebar__img" src={img} alt="day's playlist" />
-          </a>
-      </div>
-  )
+    return (
+        <S.SidebarItem>
+            <a href="/">
+                <img src={img} alt="day's playlist" />
+            </a>
+        </S.SidebarItem>
+    )
 }
 
 export default SidebarItem

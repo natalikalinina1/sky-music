@@ -1,22 +1,21 @@
 
+import * as S from './style/style'
 
 function Volume() {
     return (
-      <div className="bar__volume-block volume">
-      <div className="volume__content">
-           <div className="volume__image">
-               <svg className="volume__svg" alt="volume">
-                   <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
-               </svg>
-           </div>
-           <div className="volume__progress _btn">
-               <input className="volume__progress-line _btn" type="range" name="range"/>
-           </div>
-  
-      </div>
-   </div>
+        <S.BarVolumeBlock>
+            <S.VolumeContent>
+                <S.VolumeImage>
+                    <S.VolumeSvg alt="volume">
+                        <use xlinkHref="img/icon/sprite.svg#icon-volume"></use>
+                    </S.VolumeSvg>
+                </S.VolumeImage>
+                <S.VolumeProgress>
+                    <S.VolumeProgressLine type="range" name="range" />
+                </S.VolumeProgress>
+            </S.VolumeContent>
+        </S.BarVolumeBlock>
     )
-  }
-  
-  export default Volume
-  
+}
+
+export default Volume

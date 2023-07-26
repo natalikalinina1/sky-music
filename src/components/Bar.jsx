@@ -1,18 +1,19 @@
 import Player from "./Player/Player";
 import Volume from "./Volume";
-export { Bar };
+import * as S from './style/style'
+
 function Bar() {
-  return (
-    <div className="bar">
-      <div className="bar__content">
-        <div className="bar__player-progress"></div>
-        <div className="bar__player-block">
-          <Player />
-          <Volume />
-        </div>
-      </div>
-    </div>
-  );
+    return (
+        <S.Bar>
+            <S.BarContent>
+                <S.BarPlayerProgress></S.BarPlayerProgress>
+                <S.BarPlayerBlock>
+                    <Player />
+                    <Volume />
+                </S.BarPlayerBlock>
+            </S.BarContent>
+        </S.Bar>
+    )
 }
 
-export default Bar;
+export default Bar

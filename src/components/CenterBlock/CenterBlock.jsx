@@ -1,11 +1,27 @@
 import Search from "../Search";
-import Track from "./CenterBlockTrack";
-import Filter from "../Filter";
+import Filter from "../Filter/Filter";
 import CenterBlockContent from "./CenterBlockContent";
 import { useState, useEffect } from 'react'
 import {getAllTracks} from '../../API/Api'
+import * as S from '../style/style'
 
 function CenterBlock() {
+    const [tracks, setTracks] = useState([])
+    useEffect(() => {
+        getAllTracks().then((data) => setTracks(data))
+    }, [])
+    return (
+        <S.Centerblock>
+            <Search />
+            <S.CenterblockTitle>Треки</S.CenterblockTitle>
+            <Filter tracks={tracks} />
+            <CenterBlockContent tracks={tracks} />
+        </S.Centerblock>
+    )
+}
+export default CenterBlock
+
+/*function CenterBlock() {
   const [ tracks, setTracks ] = useState([]);
   useEffect(() => {
     getAllTracks().then((data) => setTracks(data));
@@ -19,4 +35,4 @@ function CenterBlock() {
     </div>
   );
 }
-export default CenterBlock;
+export default CenterBlock;*/
