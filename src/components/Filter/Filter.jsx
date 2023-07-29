@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import * as S from '../style/style'
+import * as S from './style.Filter'
 import FilterItem from './FilterItem.jsx'
 
 function Filter({ tracks }) {

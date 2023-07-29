@@ -1,6 +1,6 @@
-import Bar from '../components/Bar'
+import Bar from '../components/Bar/Bar'
 import CenterBlock from '../components/CenterBlock/CenterBlock'
-import Nav from '../components/Nav'
+import Nav from '../components/Nav/Nav'
 import Sidebar from '../components/Sidebar/Sidebar'
 
 import * as S from '../components/style/style'

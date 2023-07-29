@@ -1,7 +1,7 @@
 import FilterDropList from './FilterDropList/FilterDropList'
 import React, { useState } from 'react'
 import FilterCounter from './FilterDropList/FilterCounter/FilterCounter'
-import * as S from '../style/style'
+import * as S from './style.Filter'
 
 const filterListByYear = ['Более новые', 'Более старые']
 

@@ -1,5 +1,5 @@
 
-import * as S from '../style/style'
+import * as S from './style.Player'
 import PlayerBtn from './PlayerBtn'
 
 function PlayerControls() {

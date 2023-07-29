@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '../style/style'
+import * as S from '../Play/style.Play'
 
 function SceletonSidebarList() {
     return <S.SceletonSidebarItem></S.SceletonSidebarItem>

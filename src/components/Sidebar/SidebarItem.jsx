@@ -1,4 +1,4 @@
-import * as S from '../style/style'
+import * as S from './style.Sidebar'
 
 function SidebarItem({ img }) {
     return (

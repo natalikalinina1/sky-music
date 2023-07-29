@@ -1,4 +1,4 @@
-import * as S from '../style/style'
+import * as S from './style.CenterBlock'
 function CenterBlockContentTitle() {
     return (
         <S.CenterBlockContentTitle>

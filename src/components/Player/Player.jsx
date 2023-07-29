@@ -1,6 +1,6 @@
 import PlayerControls from "./PlayerControls";
 import PlayerTrack from "./PlayerTrack";
-import * as S from '../style/style'
+import * as S from './style.Player'
 
 function Player() {
   return (

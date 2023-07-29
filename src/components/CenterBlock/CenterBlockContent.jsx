@@ -1,6 +1,6 @@
 import CenterBlockContentTitle from "./CenterBlockContentTitle";
 import PlayList from "../Play/PlayList";
-import * as S from '../style/style'
+import * as S from './style.CenterBlock'
 
 function CenterBlockContent({ tracks }) {
     return (

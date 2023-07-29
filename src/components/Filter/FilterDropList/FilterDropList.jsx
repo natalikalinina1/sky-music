@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import * as S from '../../style/style'
+import * as S from '../style.Filter'
 
 function FilterDropList({ type, filterList, riseSelectedFilterCount }) {
     const [filterCount, setFilterCount] = useState(0)

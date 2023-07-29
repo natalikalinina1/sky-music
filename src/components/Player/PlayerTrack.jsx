@@ -1,4 +1,4 @@
-import * as S from '../style/style'
+import * as S from './style.Player'
 
 function PlayerTrack() {
     return (

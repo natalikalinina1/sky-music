@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Burger from "./BurgerMenu/Burger";
-import Menu from "./BurgerMenu/Menu";
+import Burger from "../BurgerMenu/Burger";
+import Menu from "../BurgerMenu/Menu";
 //src\components\BurgerMenu\Burger.jsx
-import * as S from './style/style';
+import * as S from './style.Nav';
 function Nav() {
   const [isMenuOpen, setMenuOpen] = useState()
   const isOpenMenuCallBack = (isMenuOpen) => {

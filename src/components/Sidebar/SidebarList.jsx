@@ -2,7 +2,7 @@ import SceletonSidebarList from '../Sceleton/SceletonSidebarList'
 import SidebarItem from './SidebarItem'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import * as S from '../style/style'
+import * as S from './style.Sidebar'
 
 function SidebarList() {
     const [isLoading, setIsLoading] = useState(true)

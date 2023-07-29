@@ -1,6 +1,6 @@
 import { countTrackTime } from '../../helpers/helpers'
 
-import * as S from '../style/style'
+import * as S from './style.Play'
 function PlayItem({ name, author, album, duration_in_seconds }) {
     return (
         <S.PlaylistItem>

@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from '../style/style'
+import * as S from './style.Player'
 function PlayerBtn({ type }) {
     return (
         <S.PlayerBtnSvg alt={type}>

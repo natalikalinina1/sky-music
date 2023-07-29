@@ -1,6 +1,6 @@
-import Player from "./Player/Player";
-import Volume from "./Volume";
-import * as S from './style/style'
+import Player from "../Player/Player";
+import Volume from "../Volume";
+import * as S from './style.Bar'
 
 function Bar() {
     return (

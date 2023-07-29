@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
-import * as S from '../style/style'
+import * as S from './style.BurgerMenu'
 
 function Burger({ isOpenMenuCallBack }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)

@@ -3,7 +3,8 @@ import Filter from "../Filter/Filter";
 import CenterBlockContent from "./CenterBlockContent";
 import { useState, useEffect } from 'react'
 import {getAllTracks} from '../../API/Api'
-import * as S from '../style/style'
+//import * as S from '../style/style'
+import * as S from './style.CenterBlock'
 
 function CenterBlock() {
     const [tracks, setTracks] = useState([])

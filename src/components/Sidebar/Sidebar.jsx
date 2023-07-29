@@ -1,5 +1,5 @@
 import SidebarList from './SidebarList'
-import * as S from '../style/style'
+import * as S from './style.Sidebar'
 
 function Sidebar() {
     return (
