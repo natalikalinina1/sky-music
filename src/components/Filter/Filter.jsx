@@ -28,6 +28,7 @@ function Filter({ tracks }) {
                 type={'year'}
                 isDropdownsOpen={isDropdownsOpen === 'year'}
                 toggleDropDown={toggleDropDown}
+               
             />
             <FilterItem
                 name={'жанру'}
