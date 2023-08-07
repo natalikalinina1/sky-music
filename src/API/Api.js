@@ -9,8 +9,9 @@ export const getCompilation = async (id) => {
     return await response.json()
 }
 
-export const getAllFavourite = async () => {
+export const getAllFavourite = async () => 
     const response = await fetch(URL_TRACKS + '/catalog/track/favourite/all/')
+
     return await response.json()
 }
 
