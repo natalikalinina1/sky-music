@@ -1,5 +1,5 @@
 import styled, {css,createGlobalStyle} from 'styled-components'
-
+import { Link } from 'react-router-dom'
 export const GlobalStyle = createGlobalStyle`
 * {
   margin: 0;
@@ -61,7 +61,7 @@ export const MenuItem = styled.li`
     padding: 5px 0;
     margin-bottom: 16px;
 `
-export const MenuLink = styled.a`
+export const MenuLink = styled(Link)`
     ${MainTextMixin}
 `
 export const BurgerLine = styled.span`

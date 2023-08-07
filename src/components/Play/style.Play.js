@@ -150,3 +150,8 @@ export const ContentPlaylist = styled.div`
     flex-direction: column;
     overflow-y: auto;
 `
+export const CenterblockText = styled.h6`
+    ${MainTextMixin}
+    font-size: 32px;
+    line-height: 72px;
+`

@@ -99,9 +99,11 @@ export const FilterDropListContent = styled.div`
     flex-direction: column;
     row-gap: 28px;
 `
-export const FilterDropListItem = styled.p`
+export const FilterDropItem = styled.p`
     ${MainTextMixin}
     font-size: 20px;
+    color: ${(props) => (props.$selected ? '#b672ff' : '#ffffff')};
+    text-decoration: ${(props) => (props.$selected ? 'underline' : 'none')};
     white-space: nowrap;
     :hover {
         ${HoverMixin}
