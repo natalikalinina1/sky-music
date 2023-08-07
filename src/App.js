@@ -1,13 +1,14 @@
-//import "./style/App.css";
-import MainPage from "./pages/Main";
 
+import Routers from './Routers'
 import { GlobalStyle } from './components/style/style'
+import React from 'react'
+
 
 function App() {
     return (
         <>
             <GlobalStyle />
-            <MainPage />
+            <Routers />
         </>
     )
 }

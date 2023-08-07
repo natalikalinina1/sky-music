@@ -26,18 +26,19 @@ function Filter({ tracks }) {
                 name={'году выпуска'}
                 tracks={tracks}
                 type={'year'}
-                isDropdownsOpen={isDropdownsOpen === 'year'}
-                toggleDropDown={toggleDropDown}
+               toggleDropDown={() => toggleDropDown('year')}
+               
             />
             <FilterItem
                 name={'жанру'}
                 tracks={tracks}
                 type={'genre'}
-                isDropdownsOpen={isDropdownsOpen === 'genre'}
-                toggleDropDown={toggleDropDown}
+                toggleDropDown={() => toggleDropDown('genre')}
             />
         </S.Filter>
     )
 }
 
 export default Filter
+
+

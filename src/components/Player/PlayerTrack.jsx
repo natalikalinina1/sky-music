@@ -6,7 +6,7 @@ function PlayerTrack() {
             <S.TrackPlayContain>
                 <S.TrackPlayImage>
                     <S.TrackPlaySvg alt="music">
-                        <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                     </S.TrackPlaySvg>
                 </S.TrackPlayImage>
                 <S.TrackPlayAuthor>
@@ -24,7 +24,7 @@ function PlayerTrack() {
             <S.TrackPlayLikeDis>
                 <S.TrackPlayLikeDisIcon>
                     <S.TrackPlayLikeDisSvg alt="like">
-                        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                     </S.TrackPlayLikeDisSvg>
                 </S.TrackPlayLikeDisIcon>
                 <S.TrackPlayLikeDisIcon>
@@ -32,7 +32,7 @@ function PlayerTrack() {
                         className="track-play__dislike-svg"
                         alt="dislike"
                     >
-                        <use xlinkHref="img/icon/sprite.svg#icon-dislike"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
                     </S.TrackPlayLikeDisSvg>
                 </S.TrackPlayLikeDisIcon>
             </S.TrackPlayLikeDis>

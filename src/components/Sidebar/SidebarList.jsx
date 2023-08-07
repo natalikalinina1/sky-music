@@ -9,7 +9,7 @@ function SidebarList() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsLoading(false)
-        }, 2000)
+        }, 1000)
 
         return () => clearTimeout(timer)
     }, [])
@@ -24,17 +24,21 @@ function SidebarList() {
                     </>
                 ) : (
                     <>
-                        <SidebarItem
-                            img={'img/playlist01.png'}
+                     <SidebarItem
+                            img={'/img/playlist01.png'}
                             alt={"day's playlist"}
+                            linkTo="/collections/1"
                         />
                         <SidebarItem
-                            img={'img/playlist02.png'}
+                            img={'/img/playlist02.png'}
                             alt={'100 dance hits'}
+                            linkTo="/collections/2"
                         />
                         <SidebarItem
-                            img={'img/playlist03.png'}
+                            img={'/img/playlist03.png'}
                             alt={'indi-dance'}
+                            linkTo="/collections/3"
+                       
                         />
                     </>
                 )}
@@ -44,3 +48,4 @@ function SidebarList() {
 }
 
 export default SidebarList
+
