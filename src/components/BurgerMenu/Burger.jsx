@@ -1,11 +1,24 @@
-function Burger() {
+import { useEffect, useState, useCallback } from 'react'
+import * as S from './style.BurgerMenu'
+
+function Burger({ isOpenMenuCallBack }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    useEffect(() => {
+        isOpenMenuCallBack(isMenuOpen)
+    }, [isOpenMenuCallBack, isMenuOpen])
+
+    const toggleMenu = useCallback(() => {
+        setIsMenuOpen(prevState => !prevState)
+    }, [])
+
     return (
-      <div className="nav__burger burger">
-        <span className="burger__line"></span>
-        <span className="burger__line"></span>
-        <span className="burger__line"></span>
-      </div>
-    );
-  }
-  
-  export default Burger;
+        <S.NavBurger onClick={toggleMenu}>
+            {Array.from({ length: 3 }).map((i, index) => (
+                <S.BurgerLine key={index} />
+            ))}
+        </S.NavBurger>
+    )
+}
+
+export default Burger
+

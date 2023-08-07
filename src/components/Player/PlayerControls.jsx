@@ -1,19 +1,17 @@
-import PrevBtn from "../playerBtns/PrevBtn";
-import PlayBtn from "../playerBtns/PlayBtn";
-import NextBtn from "../playerBtns/NextBtn";
-import RepeatBtn from "../playerBtns/RepeatBtn";
-import ShuffleBtn from "../playerBtns/ShuffleBtn";
+
+import * as S from './style.Player'
+import PlayerBtn from './PlayerBtn'
 
 function PlayerControls() {
-  return (
-    <div className="player__controls">
-      <PrevBtn />
-      <PlayBtn />
-      <NextBtn />
-      <RepeatBtn />
-      <ShuffleBtn />
-    </div>
-  );
+    return (
+        <S.PlayerControls>
+            <PlayerBtn type="prev" />
+            <PlayerBtn type="play" />
+            <PlayerBtn type="next" />
+            <PlayerBtn type="repeat" />
+            <PlayerBtn type="shuffle" />
+        </S.PlayerControls>
+    )
 }
 
-export default PlayerControls;
+export default PlayerControls

@@ -1,19 +1,15 @@
-import './style/App.css';
-import  Mainbar  from './components/Mainbar';
-import  Bar  from './components/Bar';
+//import "./style/App.css";
+import MainPage from "./pages/Main";
 
+import { GlobalStyle } from './components/style/style'
 
 function App() {
-  return (
-    <div className="wrapper">
-    <div className="container">
-     <Mainbar/>
-     <Bar/>
-    </div>
-</div>
-
-  );
+    return (
+        <>
+            <GlobalStyle />
+            <MainPage />
+        </>
+    )
 }
 
-export default App;
-
+export default App

@@ -1,12 +1,13 @@
 import PlayerControls from "./PlayerControls";
 import PlayerTrack from "./PlayerTrack";
+import * as S from './style.Player'
 
 function Player() {
   return (
-    <div className="bar__player player">
-      <PlayerControls />
-      <PlayerTrack />
-    </div>
+    <S.BarPlayer>
+            <PlayerControls />
+            <PlayerTrack />
+        </S.BarPlayer>
   );
 }
 

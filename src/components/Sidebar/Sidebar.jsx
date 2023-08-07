@@ -1,17 +1,16 @@
-import SidebarList from "./SidebarList";
+import SidebarList from './SidebarList'
+import * as S from './style.Sidebar'
 
 function Sidebar() {
-  return (
-    <div className="main__sidebar sidebar">
-      <div className="sidebar__personal">
-        <p className="sidebar__personal-name">Sergey.Ivanov</p>
-        <div className="sidebar__avatar"></div>
-      </div>
-      <div className="sidebar__block">
-        <SidebarList />
-      </div>
-    </div>
-  );
+    return (
+        <S.Sidebar>
+            <S.SidebarPersonal>
+                <S.SidebarPersonalName>Sergey.Ivanov</S.SidebarPersonalName>
+                <S.SidebarAvatar></S.SidebarAvatar>
+            </S.SidebarPersonal>
+            <SidebarList />
+        </S.Sidebar>
+    )
 }
 
-export default Sidebar;
+export default Sidebar
