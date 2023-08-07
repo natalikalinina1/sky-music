@@ -6,7 +6,7 @@ import Login from './pages/Login'
 import Registration from './pages/Registration'
 import MyTracks from './pages/MyTracks'
 import Compilation from './pages/Сompilation'
-import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute'
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute'
 import { getCookie } from './helpers/helpers'
 function Routers() {
     const [isAllowed, setIsAllowed] = useState(Boolean(getCookie('token')))
