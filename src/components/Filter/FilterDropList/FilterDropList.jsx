@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
+//import { useEffect, useState } from 'react'
 import * as S from '../style.Filter'
+import FilterDropItem from './FilterDropItem'
 
-function FilterDropList({ type, filterList, riseSelectedFilterCount }) {
-    const [filterCount, setFilterCount] = useState(0)
-    useEffect(() => {
-        riseSelectedFilterCount(filterCount)
-    }, [filterCount,riseSelectedFilterCount])
 
+function FilterDropList({ type, filterList, riseCount, filterCountArray }) {
     return (
         <S.FilterDropList>
             <S.FilterDropListWrapper>
@@ -14,14 +11,13 @@ function FilterDropList({ type, filterList, riseSelectedFilterCount }) {
                     {type !== 'year' ? (
                         filterList.map((item, index) => {
                             return (
-                                <S.FilterDropListItem
+                                <FilterDropItem
                                     key={index}
-                                    onClick={() =>
-                                        setFilterCount(filterCount + 1)
-                                    }
-                                >
-                                    {item}
-                                </S.FilterDropListItem>
+                                    id={index}
+                                    item={item}
+                                    riseCount={riseCount}
+                                    filterCountArray={filterCountArray}
+                                />
                             )
                         })
                     ) : (
@@ -40,12 +36,10 @@ function FilterDropList({ type, filterList, riseSelectedFilterCount }) {
                             })}
                         </S.FilterRadio>
                     )}
-                </S.FilterDropListContent>
+               </S.FilterDropListContent>
             </S.FilterDropListWrapper>
         </S.FilterDropList>
     )
 }
 
 export default FilterDropList
-
-

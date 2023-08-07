@@ -53,6 +53,7 @@ const SvgLight = css`
 export const Centerblock = styled.div`
     flex-grow: 3;
     padding: 20px 40px 20px 111px;
+    min-height: 100vh;
 `
 
 export const CenterblockTitle = styled.h2`
@@ -87,4 +88,12 @@ export const PlaylistTitleSvg = styled.svg`
     ${SvgLight}
     width: 12px;
     height: 12px;
+`
+
+export const Container = styled.div`
+    min-height: 100vh;
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #181818;
 `

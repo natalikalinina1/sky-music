@@ -8,7 +8,7 @@ function PlayItem({ name, author, album, duration_in_seconds }) {
                 <S.TrackTtitle>
                     <S.TrackTitleImage>
                         <S.TrackTitleSvg alt="music">
-                            <use xlinkHref="img/icon/sprite.svg#icon-note"></use>
+                            <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
                         </S.TrackTitleSvg>
                     </S.TrackTitleImage>
                     <S.TrackTitleLink href="http://">
@@ -19,7 +19,7 @@ function PlayItem({ name, author, album, duration_in_seconds }) {
                 <S.TrackAlbumLink href="http://">{album}</S.TrackAlbumLink>
                 <div>
                     <S.TrackTimeSvg alt="time">
-                        <use xlinkHref="img/icon/sprite.svg#icon-like"></use>
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
                     </S.TrackTimeSvg>
                     <S.TrackTimeText>
                         {countTrackTime(duration_in_seconds)}
