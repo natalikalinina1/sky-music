@@ -5,11 +5,11 @@ export const getAllTracks = async () => {
     return await response.json()
 }
 
-export const getCompilation = async (id) => {
+/*export const getCompilation = async (id) => {
   const response = await fetch(URL_TRACKS + `/catalog/selection/${id}/`)
   return await response.json()
 }
-
+*/
 export async function getTracks() {
   
   const response = await fetch("https://painassasin.online/catalog/track/all/");
@@ -50,5 +50,6 @@ export const getToken = async (body) => {
           'Content-Type': 'application/json;charset=utf-8',
       },
   })
+  
   return await response
 }
