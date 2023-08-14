@@ -4,7 +4,7 @@ import font1 from "./assets/fonts/StratosSkyeng.woff";
 import font2 from "./assets/fonts/StratosSkyeng.woff2";
 import { AppRoutes } from "./Routers";
 import { useEffect, useState } from "react";
-import { getTracks } from "./API/api";
+import { getTracks } from "./api";
 
 const GlobalStyle = createGlobalStyle`
 * {

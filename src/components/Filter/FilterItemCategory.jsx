@@ -1,6 +1,7 @@
 import React from "react";
-import { items } from "../Play/Playlist";
+import { items } from "../Play/Playist";
 import * as S from "./style.Filter";
+
 
 function FilterItemCategory({
   CategoryDisplayed,

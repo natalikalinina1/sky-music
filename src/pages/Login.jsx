@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as S from '../components/style'
 import { Link, useNavigate } from 'react-router-dom'
-import { login, getToken } from '../API/api'
+import { login, getToken } from '../api'
 import { getCookie } from '../helpers/helpers'
 
 export function Login() {

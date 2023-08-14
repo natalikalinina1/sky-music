@@ -1,5 +1,5 @@
 import React from "react";
-import Playlist from "../Play/Playlist";
+import Playlist from "../Play/Playist";
 import Filter from "../Filter/Filter";
 import * as S from "./style.CenterBlock";
 
