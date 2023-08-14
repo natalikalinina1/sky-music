@@ -1,16 +1,12 @@
-import React from 'react'
-import * as S from '../components/CenterBlock/style.CenterBlock'
+import React from "react";
+import * as S from "../components/style";
 
 function NotFound() {
-    return (
-        <S.Container>
-            <S.Centerblock>
-                <S.CenterblockTitle>
-                   Что-то пошло не так, страница не найдена
-                </S.CenterblockTitle>
-            </S.Centerblock>
-        </S.Container>
-    )
+  return (
+    <S.PageWrapper>
+      <div> Что-то пошло не так, страница не найдена</div>
+    </S.PageWrapper>
+  );
 }
 
-export default NotFound
+export default NotFound;

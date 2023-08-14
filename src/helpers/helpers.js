@@ -1,10 +1,3 @@
-export const countTrackTime = (secDuraction) => {
-    const min = Math.floor(secDuraction / 60)
-
-    const sec = secDuraction - min * 60
-
-    return `${min}:${sec} `
-}
 
 export function getCookie(c_name) {
     if (document.cookie.length > 0) {

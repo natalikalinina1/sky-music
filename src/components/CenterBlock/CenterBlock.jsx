@@ -1,31 +1,44 @@
-import Search from "../Search";
+import React from "react";
+import Playlist from "../Play/Playlist";
 import Filter from "../Filter/Filter";
-import CenterBlockContent from "./CenterBlockContent";
-import { useState, useEffect } from 'react'
-import {getAllTracks} from '../../API/Api'
-//import * as S from '../style/style'
-import * as S from './style.CenterBlock'
+import * as S from "./style.CenterBlock";
 
+function Centerblock({ loaded, tracks, setdisplayed, setCurrentTrack, error }) {
+  
+  return (
+    
+    <S.MainCenterblock>
+      <S.CenterblockSearch>
+        <S.SearchSvg>
+          <use xlinkHref="/img/icon/sprite.svg#icon-search"></use>
+        </S.SearchSvg>
+        <S.SearchText type="search" placeholder="Поиск" name="search" />
+      </S.CenterblockSearch>
+      <S.CenterblockHeading>Треки</S.CenterblockHeading>
+      <Filter />
+      <S.CenterblockContent>
+        <S.ContentTitle>
+          <S.PlaylistTitle>Трек</S.PlaylistTitle>
+          <S.PlaylistTitle>ИСПОЛНИТЕЛЬ</S.PlaylistTitle>
+          <S.PlaylistTitle>АЛЬБОМ</S.PlaylistTitle>
+          <S.PlaylistTitle>
+            <S.PlaylistTitleSvg alt="time">
+              <use xlinkHref="/img/icon/sprite.svg#icon-watch"></use>
+            </S.PlaylistTitleSvg>
+          </S.PlaylistTitle>
+        </S.ContentTitle>
+        <Playlist
+          loaded={loaded}
+          tracks={tracks}
+          setdisplayed={setdisplayed}
+          setCurrentTrack={setCurrentTrack}
+          error={error}
+        />
+      </S.CenterblockContent>
+    </S.MainCenterblock>
+  
 
-
-
-function CenterBlock({ centerBlockTitle = 'Треки', settedTracks }) {
-    const [tracks, setTracks] = useState([])
-    useEffect(() => {
-        getAllTracks().then((data) => setTracks(data))
-    })
-
-    return (
-        <S.Centerblock>
-            <Search/>
-            <S.CenterblockTitle>{centerBlockTitle}</S.CenterblockTitle>
-            <Filter tracks={settedTracks ? settedTracks : tracks} />
-            <CenterBlockContent tracks={settedTracks ? settedTracks : tracks} />
-        </S.Centerblock>
-    )
+  );
 }
 
-export default CenterBlock
-
-
-
+export default Centerblock;

@@ -1,46 +1,38 @@
-import { useState } from 'react'
-import * as S from './style.Filter'
-import FilterItem from './FilterItem.jsx'
+import React from "react";
+import FilterItemSinger from "./FilterItemSinger";
+import { useState } from "react";
+import FilterItemYear from "./FilterItemYear";
+import FilterItemCategory from "./FilterItemCategory";
+import * as S from "./style.Filter";
 
-function Filter({ tracks }) {
-    const [isDropdownsOpen, setIsDropdownsOpen] = useState(null)
-    const toggleDropDown = (type) => {
-        if (type === isDropdownsOpen) {
-            setIsDropdownsOpen(null)
-            return
-        }
-        setIsDropdownsOpen(type)
-    }
-    return (
-        <S.Filter>
-            <S.FilterTitle>Искать по:</S.FilterTitle>
-            <FilterItem
-                name={'исполнителю'}
-                tracks={tracks}
-                type={'author'}
-                isDropdownsOpen={isDropdownsOpen === 'author'}
-                toggleDropDown={toggleDropDown}
-                setIsDropdownsOpen={setIsDropdownsOpen}
-            />
-            <FilterItem
-                name={'году выпуска'}
-                tracks={tracks}
-                type={'year'}
-                isDropdownsOpen={isDropdownsOpen === 'year'}
-                toggleDropDown={toggleDropDown}
-               
-            />
-            <FilterItem
-                name={'жанру'}
-                tracks={tracks}
-                type={'genre'}
-                isDropdownsOpen={isDropdownsOpen === 'genre'}
-                toggleDropDown={toggleDropDown}
-            />
-        </S.Filter>
-    )
+function Filter() {
+  const [SingerDisplayed, setFirstShown] = useState(false);
+  const [yearDisplayed, setYearDisplayed] = useState(false);
+  const [CategoryDisplayed, setCategoryDisplayed] = useState(false);
+
+  return (
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
+      <FilterItemSinger
+        SingerDisplayed={SingerDisplayed}
+        setSingerDisplayed={setFirstShown}
+        setYearDisplayed={setYearDisplayed}
+        setCategoryDisplayed={setCategoryDisplayed}
+      />
+      <FilterItemYear
+        yearDisplayed={yearDisplayed}
+        setYearDisplayed={setYearDisplayed}
+        setSingerDisplayed={setFirstShown}
+        setCategoryDisplayed={setCategoryDisplayed}
+      />
+      <FilterItemCategory
+        CategoryDisplayed={CategoryDisplayed}
+        setCategoryDisplayed={setCategoryDisplayed}
+        setYearDisplayed={setYearDisplayed}
+        setSingerDisplayed={setFirstShown}
+      />
+    </S.CenterblockFilter>
+  );
 }
 
-export default Filter
-
-
+export default Filter;
