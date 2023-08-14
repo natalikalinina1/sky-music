@@ -1,4 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
+
 import { MainPage } from "./pages/MainPage";
 import { Login } from "./pages/Login.jsx";
 import MyTracks from "./pages/MyTracks";
@@ -6,6 +7,7 @@ import NotFound from "./pages/NotFound";
 import Compilation from "./pages/Compilation";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import Registration from "./pages/Registration";
+
 import { getCookie } from './helpers/helpers'
 import React, { useState } from 'react'
 
