@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { MainPage } from "./pages/MainPage";
-import { Login } from "./pages/Login.jsx";
+import { Login } from "./pages/Login";
 import MyTracks from "./pages/MyTracks";
 import NotFound from "./pages/NotFound";
 import Compilation from "./pages/Compilation";
