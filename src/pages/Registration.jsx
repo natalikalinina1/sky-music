@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import * as S from '../components/style/style'
+import * as S from '../components/style'
 import { useNavigate } from 'react-router-dom'
-import { registration } from '../API/Api'
+import { registration } from '../API/api'
 
 
 function Registration() {

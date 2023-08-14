@@ -1,99 +1,129 @@
-import styled, { css,createGlobalStyle } from 'styled-components'
-
-export const GlobalStyle = createGlobalStyle`
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-*:before,
-*:after {
-    box-sizing: border-box;
-}
-
-a,
-a:visited {
-    text-decoration: none;
-    font-family: 'StratosSkyeng', sans-serif;
-    cursor: pointer;
-}
+import styled from 'styled-components'
 
 
-ul li {
-    list-style: none;
-}
+export const MainCenterblock = styled.div`
+  width: auto;
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  padding: 20px 40px 20px 40px;
+`;
 
-@font-face {
-    font-family: 'StratosSkyeng';
-    src: local('StratosSkyeng'), local('StratosSkyeng'),
-        url('../fonts/Stratos-Regular.woff2') format('woff2'),
-        url('../fonts/Stratos-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
+export const CenterblockSearch = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #4e4e4e;
+  margin-bottom: 51px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  @media (max-width: 1430px) {
+    margin-bottom: 0px;
+  }
+`;
 
-html,
-body {
-    font-family: 'StratosSkyeng', sans-serif;
-}
-`
-const MainTextMixin = css`
+export const SearchSvg = styled.svg`
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+  stroke: #ffffff;
+  fill: transparent;
+`;
+
+export const SearchText = styled.input`
+  -webkit-box-flex: 100;
+  -ms-flex-positive: 100;
+  flex-grow: 100;
+  background-color: transparent;
+  border: none;
+  padding: 13px 10px 14px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  ::-webkit-input-placeholder {
+    background-color: transparent;
+    color: #ffffff;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
+  }
+  :-ms-input-placeholder {
+    background-color: transparent;
     color: #ffffff;
-`
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  ::-ms-input-placeholder {
+    background-color: transparent;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  ::placeholder {
+    background-color: transparent;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+  }
+`;
 
-const SvgLight = css`
-    fill: transparent;
-    stroke: #696969;
-`
-export const Centerblock = styled.div`
-    flex-grow: 3;
-    padding: 20px 40px 20px 111px;
-    min-height: 100vh;
-`
-
-export const CenterblockTitle = styled.h2`
-    ${MainTextMixin}
-    font-size: 64px;
-    line-height: 72px;
-    letter-spacing: -0.8px;
-    margin-bottom: 45px;
-`
-
+export const CenterblockHeading = styled.h2`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 72px;
+  letter-spacing: -0.8px;
+  margin-bottom: 45px;
+  @media (max-width: 1430px) {
+    margin-bottom: 0;
+  }
+`;
 
 export const CenterblockContent = styled.div`
-    display: flex;
-    flex-direction: column;
-`
+display: flex;
+flex-direction: column;
 
-export const CenterBlockContentTitle = styled.div`
-    display: grid;
-    grid-template-columns: 7.5fr 5.4fr 4.08fr 1fr;
-    margin-bottom: 24px;
-`
+
+`;
 export const PlaylistTitle = styled.div`
-    ${MainTextMixin}
-    font-size: 14px;
-    letter-spacing: 2px;
-    color: #696969;
-    text-transform: uppercase;
-`
+  
+ 
+font-size: 14px;
+letter-spacing: 2px;
+color: #696969;
+text-transform: uppercase;
+
+`;
+
 
 
 export const PlaylistTitleSvg = styled.svg`
-    ${SvgLight}
+
+fill: transparent;
+stroke: #696969;
     width: 12px;
     height: 12px;
-`
+`;
 
-export const Container = styled.div`
-    min-height: 100vh;
-    max-width: 1920px;
-    margin: 0 auto;
-    position: relative;
-    background-color: #181818;
-`
+export const ContentTitle = styled.div`
+display: grid;
+grid-template-columns: 7.5fr 5.4fr 4.08fr 1fr;
+margin-bottom: 24px;
+`;
+
+

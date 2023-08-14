@@ -1,26 +1,47 @@
+import React from "react";
 import { useState } from "react";
-import Burger from "../BurgerMenu/Burger";
-import Menu from "../BurgerMenu/Menu";
-//src\components\BurgerMenu\Burger.jsx
-import * as S from './style.Nav';
-import { Link } from 'react-router-dom'
+import * as S from "./style.Nav";
+import { Link } from "react-router-dom";
 
 function Nav() {
-  const [isMenuOpen, setMenuOpen] = useState()
-  const isOpenMenuCallBack = (isMenuOpen) => {
-      setMenuOpen(isMenuOpen)
-  }
+  const [visible, setVisible] = useState(false);
+
+  const toggleVisibility = () => setVisible(!visible);
+
   return (
-      <S.MainNav>
-          <S.NavLogo>
-          <Link to="/">
-                    <S.LogoImg src="/img/logo.png" alt="logo" />
-                </Link>
-          </S.NavLogo>
-          <Burger isOpenMenuCallBack={isOpenMenuCallBack} />
-          {isMenuOpen ? <Menu /> : null}
-      </S.MainNav>
-  )
+    <S.Nav>
+      <S.NavLogo>
+        <S.LogoImg src="/img/logo.png" alt="logo" />
+      </S.NavLogo>
+      <S.NavBurger onClick={toggleVisibility}>
+        <S.BurgerLine></S.BurgerLine>
+        <S.BurgerLine></S.BurgerLine>
+        <S.BurgerLine></S.BurgerLine>
+      </S.NavBurger>
+
+      {visible && (
+        <S.NavMenu>
+          <S.MenuList>
+            <S.MenuItem>
+              <Link to="/">
+                <S.MenuLink>Главное</S.MenuLink>
+              </Link>
+            </S.MenuItem>
+            <S.MenuItem>
+              <Link to="/favourites">
+                <S.MenuLink>Мой плейлист</S.MenuLink>
+              </Link>
+            </S.MenuItem>
+            <S.MenuItem>
+              <Link to="/login">
+                <S.MenuLink>Войти</S.MenuLink>
+              </Link>
+            </S.MenuItem>
+          </S.MenuList>
+        </S.NavMenu>
+      )}
+    </S.Nav>
+  );
 }
 
 export default Nav;
