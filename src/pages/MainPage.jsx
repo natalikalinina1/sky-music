@@ -3,7 +3,7 @@ import { useState } from "react";
 import Bar from "../components/Bar/Bar";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Nav from "../components/Nav/Nav";
-import Centerblock from "../components/Centerblock/Centerblock";
+import Centerblock from "../components/CenterBlock/CenterVlock";
 import Footer from "../components/Footer/Footer";
 import * as S from "../components/style";
 
