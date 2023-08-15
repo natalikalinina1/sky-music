@@ -1,5 +1,5 @@
 import React from "react";
-import { items } from "../Play/Playist";
+import { items } from "../Play/Playlist";
 import * as S from "./style.Filter";
 
 

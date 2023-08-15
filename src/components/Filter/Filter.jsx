@@ -6,7 +6,7 @@ import FilterItemCategory from "./FilterItemCategory";
 import * as S from "./style.Filter";
 
 function Filter() {
-  const [SingerDisplayed, setFirstShown] = useState(false);
+  const [SingerDisplayed, setFirstdisplayed] = useState(false);
   const [yearDisplayed, setYearDisplayed] = useState(false);
   const [CategoryDisplayed, setCategoryDisplayed] = useState(false);
 
@@ -15,21 +15,21 @@ function Filter() {
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <FilterItemSinger
         SingerDisplayed={SingerDisplayed}
-        setSingerDisplayed={setFirstShown}
+        setSingerDisplayed={setFirstdisplayed}
         setYearDisplayed={setYearDisplayed}
         setCategoryDisplayed={setCategoryDisplayed}
       />
       <FilterItemYear
         yearDisplayed={yearDisplayed}
         setYearDisplayed={setYearDisplayed}
-        setSingerDisplayed={setFirstShown}
+        setSingerDisplayed={setFirstdisplayed}
         setCategoryDisplayed={setCategoryDisplayed}
       />
       <FilterItemCategory
         CategoryDisplayed={CategoryDisplayed}
         setCategoryDisplayed={setCategoryDisplayed}
         setYearDisplayed={setYearDisplayed}
-        setSingerDisplayed={setFirstShown}
+        setSingerDisplayed={setFirstdisplayed}
       />
     </S.CenterblockFilter>
   );
