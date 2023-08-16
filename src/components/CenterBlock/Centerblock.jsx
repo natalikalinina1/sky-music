@@ -1,10 +1,17 @@
 import React from "react";
-import Playlist from "../Play/Playist";
+import Playlist from "../Play/Playlist";
 import Filter from "../Filter/Filter";
 import * as S from "./style.CenterBlock";
 
-function Centerblock({ loaded, tracks, setdisplayed, setCurrentTrack, error }) {
-  
+
+function Centerblock({
+  loaded,
+  tracks,
+  setdisplayed,
+  setCurrentTrack,
+  error,
+  setautoplay,
+}) {
   return (
     
     <S.MainCenterblock>
@@ -33,6 +40,7 @@ function Centerblock({ loaded, tracks, setdisplayed, setCurrentTrack, error }) {
           setdisplayed={setdisplayed}
           setCurrentTrack={setCurrentTrack}
           error={error}
+          setautoplay={setautoplay}
         />
       </S.CenterblockContent>
     </S.MainCenterblock>

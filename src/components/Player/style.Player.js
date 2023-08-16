@@ -5,7 +5,7 @@ export const Bar = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
-  // height: ${(props) => (props.shown ? "auto" : "80px")};
+ 
   background: rgba(28, 28, 28, 0.5);
   @media (max-width: 1430px) {
     position: fixed;
@@ -30,6 +30,7 @@ export const BarPlayerProgress = styled.div`
   width: 100%;
   height: 5px;
   background: #2e2e2e;
+  cursor: pointer;
 `;
 
 export const BarPlayerBlock = styled.div`
@@ -87,10 +88,12 @@ export const PlayerBtnPrev = styled.div`
 export const PlayerBtnPrevSvg = styled.svg`
   width: 15px;
   height: 14px;
+  cursor: pointer;
 `;
 
 export const PlayerBtnPlay = styled.div`
   margin-right: 23px;
+  cursor: pointer;
 `;
 
 export const PlayBtnPlaySvg = styled.svg`
@@ -118,13 +121,16 @@ export const PlayerBtnNextSvg = styled.svg`
   stroke: #d9d9d9;
 `;
 
-export const Svg = styled.svg``;
+export const Svg = styled.svg`
+
+display: flex;
+`;
 
 export const PlayerBtnRepeatSvg = styled(Svg)`
   width: 18px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: ${(props) => (props.loop ? "#fff" : "#696969")};
 `;
 
 export const PlayerBtnShuffleSvg = styled(Svg)`
@@ -160,6 +166,7 @@ export const PlayerBtn = styled(BtnIcon)`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const PlayerBtnRepeat = styled(PlayerBtn)`
@@ -274,6 +281,7 @@ export const TrackPlayLikeDis = styled.div`
   -ms-flex-align: center;
   align-items: center;
   margin-left: 26%;
+  margin-left: 24px;
 `;
 
 export const TrackPlayLikeSvg = styled(Svg)`
@@ -281,6 +289,7 @@ export const TrackPlayLikeSvg = styled(Svg)`
   height: 12px;
   fill: transparent;
   stroke: #696969;
+  cursor: pointer;
 `;
 
 export const TrackPlayDislikeSvg = styled(Svg)`
@@ -353,7 +362,9 @@ export const VolumeProgress = styled.div`
   cursor: pointer;
 `;
 
-export const VolumeProgressLine = styled.input`
-  width: 109px;
-  cursor: pointer;
+export const StylePlayerProgress = styled.div`
+  width: 0;
+  height: 100%;
+  background-color: rgb(141, 52, 237);
+  border-radius: 30px;
 `;
