@@ -1,17 +1,18 @@
 import React from "react";
 import * as S from "./style.Play";
+import { countTrackTime } from "../../helpers/helpers"
 
 function PlayItem({
   id,
   title,
   author,
   album,
-  time,
   loaded,
   setdisplayed,
   setCurrentTrack,
   url,
   setautoplay,
+  duration_in_seconds,
 }) {
   const displayedBar = () => {
     setdisplayed(true);
@@ -21,11 +22,14 @@ function PlayItem({
       album: album,
       id: id,
       url: url,
+    
       
     };
     setCurrentTrack(track);
     setautoplay(true);
   };
+
+  /*
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     let seconds = Math.floor(time) - minutes * 60;
@@ -35,6 +39,8 @@ function PlayItem({
     const formated = `${minutes} : ${seconds}`;
     return formated;
   };
+
+  */
 
   return (
     <>
@@ -74,7 +80,7 @@ function PlayItem({
             )}
             {loaded && (
               <S.TrackTimeText className="track__time-text">
-                  {formatTime(time)}
+                {countTrackTime(duration_in_seconds)}
               </S.TrackTimeText>
             )}
           </div>
