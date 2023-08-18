@@ -11,7 +11,7 @@ function PlayItem({
   setdisplayed,
   setCurrentTrack,
   url,
-  setautoplay,
+  setPlaying,
   duration_in_seconds,
 }) {
   const displayedBar = () => {
@@ -26,21 +26,9 @@ function PlayItem({
       
     };
     setCurrentTrack(track);
-    setautoplay(true);
+    setPlaying(true);
   };
 
-  /*
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    let seconds = Math.floor(time) - minutes * 60;
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    const formated = `${minutes} : ${seconds}`;
-    return formated;
-  };
-
-  */
 
   return (
     <>

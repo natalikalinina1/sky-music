@@ -21,35 +21,72 @@ export async function getTracks() {
   const data = await response.json();
   return data;
 }
-export const registration = async (body) => {
-  const response = await fetch(URL_TRACKS + '/user/signup/', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-      },
-  })
-  return await response.json()
+export async function registerUser(email, password) {
+  const response = await fetch("https://painassasin.online/user/signup/", {
+    method: "POST",
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+      username: `${email}`,
+    }),
+    headers: {
+ 
+      "content-type": "application/json",
+    },
+  });
+  if (response.status === 500) {
+    throw new Error("Сервер сломался");
+  } else if (response.status === 400) {
+    console.log(response.status);
+    const data = await response.json();
+    if (data.username) {
+      throw new Error(`${data.username}`);
+    } else {
+      throw new Error(`${data.password}`);
+    }
+  }
+  const data = await response.json();
+  return data;
 }
 
-export const login = async (body) => {
-  const response = await fetch(URL_TRACKS + '/user/login/', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-      },
-  })
-  return await response
+export async function loginUser(email, password) {
+  const response = await fetch("https://painassasin.online/user/login/", {
+    method: "POST",
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+    }),
+    headers: {
+      
+      "content-type": "application/json",
+    },
+  });
+  if (response.status === 500) {
+    throw new Error("Сервер сломался");
+  } else if (response.status === 401) {
+    console.log(response.status);
+    const data = await response.json();
+    throw new Error(`${data.detail}`);
+  }
+
+  const data = await response.json();
+  return data;
 }
 
-export const getToken = async (body) => {
-  const response = await fetch(URL_TRACKS + '/user/token/', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-      },
-  })
-  return await response
+export async function getToken(email, password) {
+  const response = await fetch("https://painassasin.online/user/token/", {
+    method: "POST",
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+    }),
+    headers: {
+      
+      "content-type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+  return data;
 }
+

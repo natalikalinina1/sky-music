@@ -6,8 +6,8 @@ function Audio({
   displayed,
   currentTrack,
   setCurrentTrack,
-  autoplay,
-  setautoplay,
+  isPlaying,
+  setPlaying,
 }) {
   const [loopOn, setLoopOn] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(0.5);
@@ -15,12 +15,12 @@ function Audio({
   const audio = useRef(null);
 
   useEffect(() => {
-    if (autoplay) {
+    if (isPlaying) {
       audio.current.play();
     } else {
       audio.current.pause();
     }
-  }, [autoplay]);
+  }, [isPlaying]);
 
   useEffect(() => {
     if (loopOn) {
@@ -51,19 +51,20 @@ function Audio({
         src={currentTrack.url}
         ref={audio}
         onTimeUpdate={onPlaying}
-        autoplay="true"
+        autoPlay={true}
       />
       <Player
         loaded={loaded}
         displayed={displayed}
         currentTrack={currentTrack}
-        autoplay={autoplay}
-        setautoplay={setautoplay}
+        isPlaying={isPlaying}
+        setPlaying={setPlaying}
         audio={audio}
         loopOn={loopOn}
         setLoopOn={setLoopOn}
         currentVolume={currentVolume}
         setCurrentVolume={setCurrentVolume}
+       
       />
     </>
   );

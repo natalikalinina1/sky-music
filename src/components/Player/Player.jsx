@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
 import * as S from "./style.Player";
 import VolumeProgress from "../VolumeProgress/VolumeProgress";
-
+import countTrackTime from "../../helpers/helpers";
 function Player({
   loaded,
   displayed,
   currentTrack,
-  autoplay,
-  setautoplay,
+  isPlaying,
+  setPlaying,
   audio,
   loopOn,
   setLoopOn,
@@ -16,18 +16,8 @@ function Player({
 }) {
   const progressRef = useRef(null);
 
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    let seconds = Math.floor(time) - minutes * 60;
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    const formated = `${minutes} : ${seconds}`;
-    return formated;
-  };
-
   const PlayPause = () => {
-    setautoplay(!autoplay);
+    setPlaying(!isPlaying);
   };
 
   const LoopTrack = () => {
@@ -65,8 +55,8 @@ function Player({
         >
           {currentTrack.progress ? (
             <div>
-              <span>{formatTime(currentTrack.progress)}</span>
-              <span> / {formatTime(currentTrack.length)}</span>
+              <span>{countTrackTime(currentTrack.progress)}</span>
+              <span> / {countTrackTime(currentTrack.length)}</span>
             </div>
           ) : null}
         </div>
@@ -86,7 +76,7 @@ function Player({
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
                   <S.PlayerBtnPlay>
-                    {autoplay ? (
+                    {isPlaying ? (
                       <S.PlayBtnPlaySvg alt="pause" onClick={PlayPause}>
                         <use xlinkHref="/img/icon/sprite.svg#icon-pause"></use>
                       </S.PlayBtnPlaySvg>

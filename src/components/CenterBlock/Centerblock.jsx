@@ -10,7 +10,7 @@ function Centerblock({
   setdisplayed,
   setCurrentTrack,
   error,
-  setautoplay,
+  setPlaying,
 }) {
   return (
     
@@ -40,7 +40,7 @@ function Centerblock({
           setdisplayed={setdisplayed}
           setCurrentTrack={setCurrentTrack}
           error={error}
-          setautoplay={setautoplay}
+          setPlaying={setPlaying}
         />
       </S.CenterblockContent>
     </S.MainCenterblock>

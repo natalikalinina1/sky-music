@@ -10,7 +10,7 @@ import * as S from "../components/style";
 export const MainPage = ({ tracks, loaded, error }) => {
   const [displayed, setdisplayed] = useState(false);
   const [currentTrack, setCurrentTrack] = useState("");
-  const [autoplay, setautoplay] = useState(false);
+  const [isPlaying, setPlaying] = useState(false);
   return (
     <S.Wrapper>
       <S.Container>
@@ -22,7 +22,7 @@ export const MainPage = ({ tracks, loaded, error }) => {
             setdisplayed={setdisplayed}
             setCurrentTrack={setCurrentTrack}
             error={error}
-            setautoplay={setautoplay}
+            setPlaying={setPlaying}
           />
           <Sidebar loaded={loaded} />
         </S.Main>
@@ -31,8 +31,8 @@ export const MainPage = ({ tracks, loaded, error }) => {
           displayed={displayed}
           currentTrack={currentTrack}
           setCurrentTrack={setCurrentTrack}
-          autoplay={autoplay}
-          setautoplay={setautoplay}
+          isPlaying={isPlaying}
+          setPlaying={setPlaying}
         />
         <Footer />
       </S.Container>

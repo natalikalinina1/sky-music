@@ -1,7 +1,7 @@
 //import React, { useEffect, useState } from "react";
 import PlayItem from "./PlayItem";
 import * as S from "./style.Play";
-
+import React from "react";
 export const items = [
   {
     title: "Chase",
@@ -108,7 +108,7 @@ function Playlist({
   setdisplayed,
   setCurrentTrack,
   error,
-  setautoplay,
+  setPlaying,
 }) {
   return (
     <>
@@ -140,7 +140,7 @@ function Playlist({
               setdisplayed={setdisplayed}
               setCurrentTrack={setCurrentTrack}
               url={track_file}
-              setautoplay={setautoplay}
+              setPlaying={setPlaying}
             />
           )
         )

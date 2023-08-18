@@ -3,8 +3,9 @@ import { createGlobalStyle } from "styled-components";
 import font1 from "./assets/fonts/StratosSkyeng.woff";
 import font2 from "./assets/fonts/StratosSkyeng.woff2";
 import { AppRoutes } from "./Routers";
-import { useEffect, useState } from "react";
+import { useEffect, useState,createContext, useContext } from "react";
 import { getTracks } from "./api";
+
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -50,13 +51,21 @@ a:visited {
   cursor: pointer;
 }
 `;
+export const UserContext = createContext("");
 
+export const useUserContext = () => {
+  const user = useContext(UserContext);
+  return user;
+};
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [tracks, setTracks] = useState("");
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("user")));
+    setUser(JSON.parse(localStorage.getItem("user")));
     getTracks()
       .then((tracks) => {
         console.log(tracks);
@@ -71,7 +80,14 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      < AppRoutes tracks={tracks} loaded={loaded} error={error} />
+      <UserContext.Provider value={{ user: user, setUser }}>
+        <AppRoutes
+          tracks={tracks}
+          loaded={loaded}
+          error={error}
+          setUser={setUser}
+        />
+      </UserContext.Provider>
       <GlobalStyle />
     </div>
   );
