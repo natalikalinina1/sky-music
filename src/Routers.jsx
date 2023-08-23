@@ -8,7 +8,7 @@ import Compilation from "./pages/Compilation";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import Registration from "./pages/Registration";
 
-export const AppRoutes = ({ tracks, loaded, error }) => {
+export const AppRoutes = ({loaded, error }) => {
     return (
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -21,7 +21,7 @@ export const AppRoutes = ({ tracks, loaded, error }) => {
         >
           <Route
             path="/"
-            element={<MainPage tracks={tracks} loaded={loaded} error={error} />}
+            element={<MainPage loaded={loaded} error={error} />}
           />
           <Route path="/favourites" element={<MyTracks/>} />
           <Route path="/category/:id" element={<Compilation />} />

@@ -6,11 +6,8 @@ import * as S from "./style.CenterBlock";
 
 function Centerblock({
   loaded,
-  tracks,
   setdisplayed,
-  setCurrentTrack,
   error,
-  setPlaying,
 }) {
   return (
     
@@ -36,11 +33,8 @@ function Centerblock({
         </S.ContentTitle>
         <Playlist
           loaded={loaded}
-          tracks={tracks}
           setdisplayed={setdisplayed}
-          setCurrentTrack={setCurrentTrack}
           error={error}
-          setPlaying={setPlaying}
         />
       </S.CenterblockContent>
     </S.MainCenterblock>

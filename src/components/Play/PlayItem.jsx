@@ -1,6 +1,11 @@
 import React from "react";
 import * as S from "./style.Play";
 import { countTrackTime } from "../../helpers/helpers"
+import { useDispatch } from "react-redux";
+import { setCurrentTrack } from "../../functionsReducer/createSlice/currentTrack";
+import { useSelector } from "react-redux";
+import { setPlayingStatus } from "../../functionsReducer/createSlice/playingStatus";
+
 
 function PlayItem({
   id,
@@ -9,11 +14,12 @@ function PlayItem({
   album,
   loaded,
   setdisplayed,
-  setCurrentTrack,
   url,
-  setPlaying,
   duration_in_seconds,
 }) {
+  const currentTrack = useSelector((state) => state.currentTrack.value);
+  const isplaying = useSelector((state) => state.playingStatus.value);
+  const dispatch = useDispatch();
   const displayedBar = () => {
     setdisplayed(true);
     const track = {
@@ -25,8 +31,8 @@ function PlayItem({
     
       
     };
-    setCurrentTrack(track);
-    setPlaying(true);
+    dispatch(setCurrentTrack(track));
+    dispatch(setPlayingStatus(true));
   };
 
 
@@ -37,9 +43,17 @@ function PlayItem({
           <S.TrackTitle>
             <S.TrackTitleImg>
               {loaded && (
-                <S.TrackTitleSvg alt="music">
-                  <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
-                </S.TrackTitleSvg>
+                <>
+                  {id === currentTrack.id ? (
+                    <S.TrackTitleSvg alt="music" isplaying={isplaying}>
+                      <use xlinkHref="/img/icon/sprite.svg#icon-dot"></use>
+                    </S.TrackTitleSvg>
+                  ) : (
+                    <S.TrackTitleSvg alt="music">
+                      <use xlinkHref="/img/icon/sprite.svg#icon-note"></use>
+                    </S.TrackTitleSvg>
+                  )}
+                </>
               )}
             </S.TrackTitleImg>
             <S.TrackTitleText loaded={loaded}>

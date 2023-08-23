@@ -7,10 +7,9 @@ import Centerblock from "../components/CenterBlock/Centerblock";
 import Footer from "../components/Footer/Footer";
 import * as S from "../components/style";
 
-export const MainPage = ({ tracks, loaded, error }) => {
+export const MainPage = ({loaded, error }) => {
   const [displayed, setdisplayed] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState("");
-  const [isPlaying, setPlaying] = useState(false);
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -18,21 +17,14 @@ export const MainPage = ({ tracks, loaded, error }) => {
           <Nav loaded={loaded} />
           <Centerblock
             loaded={loaded}
-            tracks={tracks}
             setdisplayed={setdisplayed}
-            setCurrentTrack={setCurrentTrack}
-            error={error}
-            setPlaying={setPlaying}
+            error={error}    
           />
           <Sidebar loaded={loaded} />
         </S.Main>
         <Audio
           loaded={loaded}
           displayed={displayed}
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-          isPlaying={isPlaying}
-          setPlaying={setPlaying}
         />
         <Footer />
       </S.Container>

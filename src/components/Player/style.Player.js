@@ -137,7 +137,7 @@ export const PlayerBtnShuffleSvg = styled(Svg)`
   width: 19px;
   height: 12px;
   fill: transparent;
-  stroke: #696969;
+  stroke: ${(props) => (props.shuffle ? "#fff" : "#696969")}
 `;
 
 export const BtnIcon = styled.div`
@@ -180,6 +180,7 @@ export const PlayerBtnShuffle = styled(PlayerBtn)`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+
 `;
 
 export const PlayerTrackPlay = styled.div`
