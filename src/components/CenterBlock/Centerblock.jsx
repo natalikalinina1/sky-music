@@ -2,13 +2,16 @@ import React from "react";
 import Playlist from "../Play/Playlist";
 import Filter from "../Filter/Filter";
 import * as S from "./style.CenterBlock";
+import { useSelector } from "react-redux";
 
 
 function Centerblock({
   loaded,
   setdisplayed,
   error,
+  loading,
 }) {
+  const currentAlbum = useSelector((state) => state.currentAlbum.value.name);
   return (
     
     <S.MainCenterblock>
@@ -18,8 +21,10 @@ function Centerblock({
         </S.SearchSvg>
         <S.SearchText type="search" placeholder="Поиск" name="search" />
       </S.CenterblockSearch>
-      <S.CenterblockHeading>Треки</S.CenterblockHeading>
-      <Filter />
+      <S.CenterblockHeading>
+        {currentAlbum === "favourites" ? "Мои треки" : "Треки"}
+      </S.CenterblockHeading>
+      {currentAlbum === "favourites" ? "" : <Filter />}
       <S.CenterblockContent>
         <S.ContentTitle>
           <S.PlaylistTitle>Трек</S.PlaylistTitle>
@@ -35,6 +40,7 @@ function Centerblock({
           loaded={loaded}
           setdisplayed={setdisplayed}
           error={error}
+          loading={loading}
         />
       </S.CenterblockContent>
     </S.MainCenterblock>

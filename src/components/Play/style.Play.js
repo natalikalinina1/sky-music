@@ -164,8 +164,9 @@ export const TrackTimeSvg = styled.svg`
   width: 14px;
   height: 12px;
   margin-right: 17px;
-  fill: transparent;
+  fill: ${(props) => (props.liked ? "rgb(217, 182, 255)" : "transparent")};
   stroke: #696969;
+  cursor: pointer;
 `;
 
 export const TrackTimeText = styled.span`

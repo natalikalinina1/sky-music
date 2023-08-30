@@ -5,8 +5,11 @@ import { useDispatch } from "react-redux";
 import { setCurrentTrack } from "../../functionsReducer/createSlice/currentTrack";
 import { useSelector } from "react-redux";
 import { setPlayingStatus } from "../../functionsReducer/createSlice/playingStatus";
-
-
+import { setActionStatus } from "../../functionsReducer/createSlice/actionStatus";
+import { addTrackToFavorite, deleteFromFav, getFavoriteTracks, updateToken } from "../../api";
+import { setCurrentAlbumPlayer } from "../../functionsReducer/createSlice/currentAlbum";
+import { useEffect } from "react";
+import { useState } from "react";
 function PlayItem({
   id,
   title,
@@ -16,10 +19,16 @@ function PlayItem({
   setdisplayed,
   url,
   duration_in_seconds,
+  likes,
+  
 }) {
   const currentTrack = useSelector((state) => state.currentTrack.value);
+  const currentAlbumName = useSelector((state) => state.currentAlbum.value.name);
   const isplaying = useSelector((state) => state.playingStatus.value);
+  const isClicked = useSelector((state) => state.actionStatus.value);
+  const tracks = useSelector((state) => state.currentAlbum.value.tracks);
   const dispatch = useDispatch();
+  const [liked, setLiked] = useState(false);
   const displayedBar = () => {
     setdisplayed(true);
     const track = {
@@ -33,6 +42,88 @@ function PlayItem({
     };
     dispatch(setCurrentTrack(track));
     dispatch(setPlayingStatus(true));
+    dispatch(setCurrentAlbumPlayer(tracks));
+  };
+
+  useEffect(() => {
+    if (currentAlbumName === "favourites") {
+      setLiked(true);
+    } else {
+      const found = Boolean(
+        likes?.find(
+          (x) =>
+            x.username === JSON.parse(localStorage.getItem("user")).username
+        )
+      );
+      console.log(found);
+      setLiked(found);
+    }
+  }, []);
+
+  useEffect(() => {}, [liked]);
+
+  const manageLikedTrack = (presentId) => {
+    if (presentId) {
+      setLiked(false);
+      deleteFromFav(id)
+        .then(() => {
+          dispatch(setActionStatus(!isClicked));
+        })
+        .catch((err) => {
+          updateToken(
+            `${JSON.parse(localStorage.getItem("refreshToken"))}`
+          ).then((data) => {
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(data));
+            deleteFromFav(id).then(() => {
+              dispatch(setActionStatus(!isClicked));
+            });
+          });
+        });
+    } else {
+      setLiked(true);
+      addTrackToFavorite(id)
+        .then(() => {
+          dispatch(setActionStatus(!isClicked));
+        })
+        .catch((err) => {
+          updateToken(
+            `${JSON.parse(localStorage.getItem("refreshToken"))}`
+          ).then((data) => {
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(data));
+            addTrackToFavorite(id).then(() => {
+              dispatch(setActionStatus(!isClicked));
+            });
+          });
+        });
+    }
+  };
+
+  const toggleLike = () => {
+    let presentObj;
+    let presentId;
+    getFavoriteTracks()
+      .then((tracks) => {
+        presentObj = tracks.find((x) => x.id === id);
+        presentId = presentObj?.id;
+        manageLikedTrack(presentId);
+      })
+      .catch((err) => {
+        if (err) {
+          updateToken(
+            `${JSON.parse(localStorage.getItem("refreshToken"))}`
+          ).then((data) => {
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(data));
+            getFavoriteTracks().then((tracks) => {
+              presentObj = tracks.find((x) => x.id === id);
+              presentId = presentObj?.id;
+              manageLikedTrack(presentId);
+            });
+          });
+        }
+      });
   };
 
 
@@ -76,13 +167,13 @@ function PlayItem({
           </S.TrackAlbum>
           <div>
             {loaded && (
-              <S.TrackTimeSvg alt="time">
+              <S.TrackTimeSvg onClick={toggleLike} liked={liked} alt="time">
                 <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
               </S.TrackTimeSvg>
             )}
             {loaded && (
               <S.TrackTimeText className="track__time-text">
-                {countTrackTime(duration_in_seconds)}
+                {  countTrackTime(currentTrack.length)}
               </S.TrackTimeText>
             )}
           </div>

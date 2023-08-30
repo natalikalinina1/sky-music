@@ -28,6 +28,7 @@ export const NavBurger = styled.div`
   width: 20px;
   height: 36px;
   padding: 13px 0;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

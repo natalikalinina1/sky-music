@@ -12,7 +12,7 @@ function Audio({
   const [loopOn, setLoopOn] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(0.5);
   const currentTrack = useSelector((state) => state.currentTrack.value);
-  const tracks = useSelector((state) => state.currentAlbum.value);
+  const tracks = useSelector((state) => state.currentAlbum.value.playerTracks);
   const isPlaying = useSelector((state) => state.playingStatus.value);
   const dispatch = useDispatch();
   const audio = useRef(null);

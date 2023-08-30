@@ -23,7 +23,7 @@ function Player({
 }) {
   const currentTrack = useSelector((state) => state.currentTrack.value);
   const dispatch = useDispatch();
-  const tracks = useSelector((state) => state.currentAlbum.value);
+  const tracks = useSelector((state) => state.currentAlbum.value.playerTracks);
   const progressRef = useRef(null);
   const [mixed, setMixed] = useState(false);
   const isPlaying = useSelector((state) => state.playingStatus.value);
@@ -165,19 +165,6 @@ function Player({
                       )}
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
-
-                  <S.TrackPlayLikeDis>
-                    <S.TrackPlayLike>
-                      <S.TrackPlayLikeSvg alt="like">
-                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                      </S.TrackPlayLikeSvg>
-                    </S.TrackPlayLike>
-                    <S.TrackPlayDislike>
-                      <S.TrackPlayDislikeSvg alt="dislike">
-                        <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                      </S.TrackPlayDislikeSvg>
-                    </S.TrackPlayDislike>
-                  </S.TrackPlayLikeDis>
                 </S.PlayerTrackPlay>
               </S.BarPlayer>
               <S.BarVolumeBlock>

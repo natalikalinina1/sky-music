@@ -7,12 +7,14 @@ import { Provider } from "react-redux";
 import currentTrackReducer from "./functionsReducer/createSlice/currentTrack";
 import currentAlbumReducer from "./functionsReducer/createSlice/currentAlbum";
 import playingStatusReducer from "./functionsReducer/createSlice/playingStatus";
+import actionStatusReducer from "./functionsReducer/createSlice/actionStatus";
 
 const store = configureStore({
   reducer: {
     currentTrack: currentTrackReducer,
     currentAlbum: currentAlbumReducer,
     playingStatus: playingStatusReducer,
+    actionStatus: actionStatusReducer,
   },
 });
 

@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import Audio from "../components/Audio/Audio";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Nav from "../components/Nav/Nav";
 import Centerblock from "../components/CenterBlock/Centerblock";
-import Footer from "../components/Footer/Footer";
 import * as S from "../components/style";
+import { useDispatch, useSelector } from "react-redux";
+import { getTracks } from "../api";
+import { setCurrentAlbum } from "../functionsReducer/createSlice/currentAlbum";
 
-export const MainPage = ({loaded, error }) => {
-  const [displayed, setdisplayed] = useState(false);
+export const MainPage = ({ loaded, error, setLoaded, setError, setdisplayed }) => {
+  const currentTrack = useSelector((state) => state.currentTrack.value);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getTracks()
+      .then((tracks) => {
+        dispatch(setCurrentAlbum(tracks));
+        setLoading(false);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (currentTrack) {
+      setdisplayed(true);
+    }
+  }, [currentTrack]);
 
   return (
     <S.Wrapper>
@@ -18,15 +40,12 @@ export const MainPage = ({loaded, error }) => {
           <Centerblock
             loaded={loaded}
             setdisplayed={setdisplayed}
-            error={error}    
+            error={error}  
+            loading={loading}
+            
           />
           <Sidebar loaded={loaded} />
         </S.Main>
-        <Audio
-          loaded={loaded}
-          displayed={displayed}
-        />
-        <Footer />
       </S.Container>
     </S.Wrapper>
   );
