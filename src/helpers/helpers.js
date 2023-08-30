@@ -1,10 +1,18 @@
 
 
-export const countTrackTime = (secDuraction) => {
-    const min = Math.floor(secDuraction / 60)
+    export const countTrackTime = (duration_in_seconds) => {
 
-    const sec = Math.floor(secDuraction - min * 60)
 
-    return `${min}:${sec} `
-}
+        let min = " " + Math.floor(duration_in_seconds / 60);
+        let sec = Math.floor(duration_in_seconds % 60);
+        
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+        return `${min}:${sec}`;
+        };
+        
+
 export default countTrackTime
+
+

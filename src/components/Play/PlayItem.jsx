@@ -173,7 +173,7 @@ function PlayItem({
             )}
             {loaded && (
               <S.TrackTimeText className="track__time-text">
-                {  countTrackTime(currentTrack.length)}
+                {  countTrackTime(duration_in_seconds)}
               </S.TrackTimeText>
             )}
           </div>
