@@ -1,26 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import Player from "../Player/Player";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setCurrentTrack } from "../../functionsReducer/createSlice/currentTrack";
+import { skipNextTrack } from "../../functionsReducer/createSlice/currentTrack";
 
 function Audio({
   loaded,
   displayed,
-  currentTrack,
-  setCurrentTrack,
-  autoplay,
-  setautoplay,
 }) {
   const [loopOn, setLoopOn] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(0.5);
-
+  const currentTrack = useSelector((state) => state.currentTrack.value);
+  const tracks = useSelector((state) => state.currentAlbum.value.playerTracks);
+  const isPlaying = useSelector((state) => state.playingStatus.value);
+  const dispatch = useDispatch();
   const audio = useRef(null);
 
   useEffect(() => {
-    if (autoplay) {
+    if (isPlaying) {
       audio.current.play();
     } else {
       audio.current.pause();
     }
-  }, [autoplay]);
+  }, [isPlaying]);
 
   useEffect(() => {
     if (loopOn) {
@@ -37,12 +40,16 @@ function Audio({
   const onPlaying = () => {
     const duration = audio.current.duration;
     const ct = audio.current.currentTime;
-    setCurrentTrack({
-      ...currentTrack,
-      progress: (ct / duration) * 100,
-      length: duration,
-    });
-    console.log(currentTrack);
+    dispatch(
+      setCurrentTrack({
+        ...currentTrack,
+        progress: (ct / duration) * 100,
+        length: duration,
+      })
+    );
+    if (ct === duration) {
+      dispatch(skipNextTrack(tracks));
+    }
   };
 
   return (
@@ -51,19 +58,17 @@ function Audio({
         src={currentTrack.url}
         ref={audio}
         onTimeUpdate={onPlaying}
-        autoplay="true"
+        autoPlay={true}
       />
       <Player
         loaded={loaded}
         displayed={displayed}
-        currentTrack={currentTrack}
-        autoplay={autoplay}
-        setautoplay={setautoplay}
         audio={audio}
         loopOn={loopOn}
         setLoopOn={setLoopOn}
         currentVolume={currentVolume}
         setCurrentVolume={setCurrentVolume}
+       
       />
     </>
   );

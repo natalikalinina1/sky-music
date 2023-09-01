@@ -72,6 +72,8 @@ export const TrackTitleSvg = styled.svg`
   height: 17px;
   fill: transparent;
   stroke: #4e4e4e;
+  animation: ${(props) =>
+    props.isplaying ? "heartbeat 1.5s ease-in-out infinite both" : "none"};
 `;
 
 export const TrackTitleText = styled.div`
@@ -162,8 +164,9 @@ export const TrackTimeSvg = styled.svg`
   width: 14px;
   height: 12px;
   margin-right: 17px;
-  fill: transparent;
+  fill: ${(props) => (props.liked ? "rgb(217, 182, 255)" : "transparent")};
   stroke: #696969;
+  cursor: pointer;
 `;
 
 export const TrackTimeText = styled.span`

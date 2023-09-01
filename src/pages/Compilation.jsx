@@ -6,10 +6,10 @@ function Compilation() {
   const params = useParams();
 
   return (
-    <S.PageWrapper>
+    <S.Wrapper>
       
       <div>Compilation {Number(params.id)}</div>
-    </S.PageWrapper>
+    </S.Wrapper>
   );
 }
 

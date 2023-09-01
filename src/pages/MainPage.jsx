@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import Audio from "../components/Audio/Audio";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Nav from "../components/Nav/Nav";
 import Centerblock from "../components/CenterBlock/Centerblock";
-import Footer from "../components/Footer/Footer";
 import * as S from "../components/style";
+import { useDispatch, useSelector } from "react-redux";
+import { getTracks } from "../api";
+import { setCurrentAlbum } from "../functionsReducer/createSlice/currentAlbum";
 
-export const MainPage = ({ tracks, loaded, error }) => {
-  const [displayed, setdisplayed] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState("");
-  const [autoplay, setautoplay] = useState(false);
+export const MainPage = ({ loaded, error, setLoaded, setError, setdisplayed }) => {
+  const currentTrack = useSelector((state) => state.currentTrack.value);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    getTracks()
+      .then((tracks) => {
+        dispatch(setCurrentAlbum(tracks));
+        setLoading(false);
+        setLoaded(true);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (currentTrack) {
+      setdisplayed(true);
+    }
+  }, [currentTrack]);
+
   return (
     <S.Wrapper>
       <S.Container>
@@ -18,23 +39,13 @@ export const MainPage = ({ tracks, loaded, error }) => {
           <Nav loaded={loaded} />
           <Centerblock
             loaded={loaded}
-            tracks={tracks}
             setdisplayed={setdisplayed}
-            setCurrentTrack={setCurrentTrack}
-            error={error}
-            setautoplay={setautoplay}
+            error={error}  
+            loading={loading}
+            
           />
           <Sidebar loaded={loaded} />
         </S.Main>
-        <Audio
-          loaded={loaded}
-          displayed={displayed}
-          currentTrack={currentTrack}
-          setCurrentTrack={setCurrentTrack}
-          autoplay={autoplay}
-          setautoplay={setautoplay}
-        />
-        <Footer />
       </S.Container>
     </S.Wrapper>
   );

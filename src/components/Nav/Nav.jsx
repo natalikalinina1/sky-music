@@ -2,12 +2,24 @@ import React from "react";
 import { useState } from "react";
 import * as S from "./style.Nav";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentAlbumName } from "../../functionsReducer/createSlice/currentAlbum";
 
 function Nav() {
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
+  const exitFunc = () => {
+    localStorage.removeItem("user");
+  };
 
   const toggleVisibility = () => setVisible(!visible);
+  const setMainPlaylist = () => {
+    dispatch(setCurrentAlbumName("main"));
+  };
 
+  const setFavPlaylist = () => {
+    dispatch(setCurrentAlbumName("favourites"));
+  };
   return (
     <S.Nav>
       <S.NavLogo>
@@ -24,17 +36,18 @@ function Nav() {
           <S.MenuList>
             <S.MenuItem>
               <Link to="/">
-                <S.MenuLink>Главное</S.MenuLink>
+                <S.MenuLink onClick={setMainPlaylist}>Главное</S.MenuLink>
               </Link>
             </S.MenuItem>
             <S.MenuItem>
               <Link to="/favourites">
-                <S.MenuLink>Мой плейлист</S.MenuLink>
+                <S.MenuLink onClick={setFavPlaylist}>Мой плейлист</S.MenuLink>
               </Link>
             </S.MenuItem>
             <S.MenuItem>
               <Link to="/login">
-                <S.MenuLink>Войти</S.MenuLink>
+          
+                <S.MenuLink onClick={exitFunc}>Выйти</S.MenuLink>
               </Link>
             </S.MenuItem>
           </S.MenuList>

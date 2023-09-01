@@ -1,42 +1,80 @@
 import styled, { css, createGlobalStyle }from "styled-components";
+import font1 from "../assets/fonts/StratosSkyeng.woff";
+import font2 from "../assets/fonts/StratosSkyeng.woff2";
 
 export const GlobalStyle = createGlobalStyle`
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-*:before,
-*:after {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-a,
-a:visited {
-    text-decoration: none;
-    font-family: 'StratosSkyeng', sans-serif;
-    cursor: pointer;
-}
-
-
-ul li {
-    list-style: none;
-}
-
-@font-face {
-    font-family: 'StratosSkyeng';
-    src: local('StratosSkyeng'), local('StratosSkyeng'),
-        url('../fonts/Stratos-Regular.woff2') format('woff2'),
-        url('../fonts/Stratos-Regular.woff') format('woff');
+  }
+  
+  *:before,
+  *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  @font-face {
+    font-family: "StratosSkyeng";
+    src: local("StratosSkyeng"), local("StratosSkyeng"),
+      url(${font2}) format("woff2"),
+      url(${font1}) format("woff");
     font-weight: 400;
     font-style: normal;
-}
+  }
+  
+  html,
+  body {
+    width: 100%;
+    min-height: 200vh;
+    background-color: #181818;;
+    // height: 100%;
+    font-family: "StratosSkyeng", sans-serif;
+    color: #ffffff;
+  }
+  @keyframes heartbeat {
+    from {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-transform-origin: center center;
+              transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    30% {
+      -webkit-transform: scale(0.80);
+              transform: scale(0.80);
+      -webkit-animation-timing-function: ease-in;
+              animation-timing-function: ease-in;
+    }
+    60% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+    90% {
+      -webkit-transform: scale(1.2);
+              transform: scale(1.2);
+      -webkit-animation-timing-function: ease-out;
+              animation-timing-function: ease-out;
+    }
+  }
+  
+  ul li {
+    list-style: none;
+  } 
+  
+  a,
+  a:visited {
+    text-decoration: none;
+    font-family: "StratosSkyeng", sans-serif;
+    cursor: pointer;
+  }
 
-html,
-body {
-    font-family: 'StratosSkyeng', sans-serif;
-}
 `
 const MainTextMixin = css`
     font-style: normal;
@@ -52,6 +90,8 @@ const HoverMixin = css`
         stroke: #acacac;
         cursor: pointer;
     }
+
+    
 `
 
 export const Login = styled.div`
@@ -132,7 +172,6 @@ export const LogoImg = styled.img`
 `
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
   background-color: #383838;
 `;
 

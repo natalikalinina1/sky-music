@@ -1,33 +1,35 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import * as S from "./style.Player";
 import VolumeProgress from "../VolumeProgress/VolumeProgress";
+import countTrackTime from "../../helpers/helpers";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  skipNextTrack,
+  skipPrevTrack,
+  skipRandomTrack,
+} from "../../functionsReducer/createSlice/currentTrack";
+import { setPlayingStatus } from "../../functionsReducer/createSlice/playingStatus";
+
 
 function Player({
   loaded,
   displayed,
-  currentTrack,
-  autoplay,
-  setautoplay,
   audio,
   loopOn,
   setLoopOn,
   currentVolume,
   setCurrentVolume,
 }) {
+  const currentTrack = useSelector((state) => state.currentTrack.value);
+  const dispatch = useDispatch();
+  const tracks = useSelector((state) => state.currentAlbum.value.playerTracks);
   const progressRef = useRef(null);
-
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    let seconds = Math.floor(time) - minutes * 60;
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    const formated = `${minutes} : ${seconds}`;
-    return formated;
-  };
+  const [mixed, setMixed] = useState(false);
+  const isPlaying = useSelector((state) => state.playingStatus.value);
 
   const PlayPause = () => {
-    setautoplay(!autoplay);
+    dispatch(setPlayingStatus(!isPlaying));
   };
 
   const LoopTrack = () => {
@@ -49,9 +51,27 @@ function Player({
     }
   };
 
-  const alertNotFinished = () => {
-    alert("пока не работает");
-  };
+  function skipToPrev() {
+    if (mixed) {
+      dispatch(skipRandomTrack(tracks));
+    } else {
+      dispatch(skipPrevTrack(tracks));
+    }
+    dispatch(setPlayingStatus(true));
+  }
+
+  function skipToNext() {
+    if (mixed) {
+      dispatch(skipRandomTrack(tracks));
+    } else {
+      dispatch(skipNextTrack(tracks));
+    }
+    dispatch(setPlayingStatus(true));
+  }
+
+  const mixTracks = () => {
+    setMixed(!mixed);
+  }
 
   return (
     <div>
@@ -65,8 +85,8 @@ function Player({
         >
           {currentTrack.progress ? (
             <div>
-              <span>{formatTime(currentTrack.progress)}</span>
-              <span> / {formatTime(currentTrack.length)}</span>
+              <span>{countTrackTime(currentTrack.progress)}</span>
+              <span> / {countTrackTime(currentTrack.length)}</span>
             </div>
           ) : null}
         </div>
@@ -81,12 +101,12 @@ function Player({
               <S.BarPlayer>
                 <S.PlayerControls>
                   <S.PlayerBtnPrev>
-                    <S.PlayerBtnPrevSvg alt="prev" onClick={alertNotFinished}>
+                  <S.PlayerBtnPrevSvg alt="prev" onClick={skipToPrev}>
                       <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                     </S.PlayerBtnPrevSvg>
                   </S.PlayerBtnPrev>
                   <S.PlayerBtnPlay>
-                    {autoplay ? (
+                    {isPlaying ? (
                       <S.PlayBtnPlaySvg alt="pause" onClick={PlayPause}>
                         <use xlinkHref="/img/icon/sprite.svg#icon-pause"></use>
                       </S.PlayBtnPlaySvg>
@@ -97,7 +117,7 @@ function Player({
                     )}
                   </S.PlayerBtnPlay>
                   <S.PlayerBtnNext>
-                    <S.PlayerBtnNextSvg alt="next" onClick={alertNotFinished}>
+                  <S.PlayerBtnNextSvg alt="next" onClick={skipToNext}>
                       <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                     </S.PlayerBtnNextSvg>
                   </S.PlayerBtnNext>
@@ -113,7 +133,8 @@ function Player({
                   <S.PlayerBtnShuffle>
                     <S.PlayerBtnShuffleSvg
                       alt="shuffle"
-                      onClick={alertNotFinished}
+                      shuffle={mixed}
+                      onClick={mixTracks}
                     >
                       <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                     </S.PlayerBtnShuffleSvg>
@@ -144,19 +165,6 @@ function Player({
                       )}
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
-
-                  <S.TrackPlayLikeDis>
-                    <S.TrackPlayLike>
-                      <S.TrackPlayLikeSvg alt="like">
-                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
-                      </S.TrackPlayLikeSvg>
-                    </S.TrackPlayLike>
-                    <S.TrackPlayDislike>
-                      <S.TrackPlayDislikeSvg alt="dislike">
-                        <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
-                      </S.TrackPlayDislikeSvg>
-                    </S.TrackPlayDislike>
-                  </S.TrackPlayLikeDis>
                 </S.PlayerTrackPlay>
               </S.BarPlayer>
               <S.BarVolumeBlock>
