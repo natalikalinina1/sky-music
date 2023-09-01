@@ -153,7 +153,7 @@ function Playlist({
                       title={title}
                       author={author}
                       album={album}
-                      time={duration_in_seconds}
+                      duration_in_seconds={duration_in_seconds}
                       loaded={loaded}
                     />
                   ))}{" "}
