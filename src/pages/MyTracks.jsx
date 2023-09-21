@@ -25,7 +25,7 @@ function MyTracks({ loaded, error, setLoaded, setError, setdisplayed }) {
       })
       .catch((err) => {
         setError(err.message);
-        if (err) {
+        if (err.name === Error) {
           updateToken(
             `${JSON.parse(localStorage.getItem("refreshToken"))}`
           ).then((data) => {
@@ -38,10 +38,11 @@ function MyTracks({ loaded, error, setLoaded, setError, setdisplayed }) {
               setLoaded(true);
             });
           });
+        } else {
+          setError(err.message);
         }
       });
   };
-
   useEffect(() => {
     getFavorits();
   }, []);
@@ -49,21 +50,21 @@ function MyTracks({ loaded, error, setLoaded, setError, setdisplayed }) {
   useEffect(() => {
     getFavorits();
   }, [isClicked]);
+
   return (
-  <S.Wrapper>
-  <S.Container>
-    <S.Main>
-      <Nav loaded={loaded} />
-      <Centerblock
-        loaded={loaded}
-        setdisplayed={setdisplayed}
-        error={error}
-        loading={loading}
-      />
-      <Sidebar loaded={loaded} />
-    </S.Main>
-  </S.Container>
-</S.Wrapper>
+    <S.Wrapper>
+    <S.Container>
+      <S.Main>
+        <Nav loaded={loaded} />
+        <Centerblock
+          loaded={loaded}
+          setdisplayed={setdisplayed}
+          error={error}
+          loading={loading}/>
+        <Sidebar loaded={loaded} />
+      </S.Main>
+    </S.Container>
+  </S.Wrapper>
 );
 }
 export default MyTracks

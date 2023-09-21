@@ -1,30 +1,38 @@
-const URL_TRACKS ='https://painassasin.online'
-export const getAllTracks = async () => {
-    const response = await fetch(URL_TRACKS + '/catalog/track/all/')
-    return await response.json()
-}
 
-export const getCompilation = async (id) => {
-  const response = await fetch(URL_TRACKS + `/catalog/selection/${id}/`)
-  return await response.json()
+class AuthenticationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "AuthenticationError";
+  }
 }
-
 
 export async function getTracks() {
-  
-  const response = await fetch("https://painassasin.online/catalog/track/all/");
+  const response = await fetch(
+    "https://skypro-music-api.skyeng.tech/catalog/track/all/"
+  );
 
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
   const data = await response.json();
-  console.log(data);
+  return data;
+}
+
+export async function getSelectedTracks(id) {
+  const response = await fetch(
+    `https://skypro-music-api.skyeng.tech/catalog/selection/${id}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Ошибка сервера");
+  }
+  const data = await response.json();
   return data;
 }
 
 export async function getFavoriteTracks() {
   const response = await fetch(
-    "https://painassasin.online/catalog/track/favorite/all/",
+    "https://skypro-music-api.skyeng.tech/catalog/track/favorite/all/",
     {
       method: "GET",
       headers: {
@@ -38,16 +46,16 @@ export async function getFavoriteTracks() {
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 401) {
-    throw new Error("bad token");
+    throw new AuthenticationError("bad token");
   }
 
   const data = await response.json();
   return data;
 }
 
-export async function addTrackToFavorite(id) {
+export async function addTrackToFavorite (id) {
   const response = await fetch(
-    `https://painassasin.online/catalog/track/${id}/favorite/`,
+    `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`,
     {
       method: "POST",
       headers: {
@@ -60,7 +68,7 @@ export async function addTrackToFavorite(id) {
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 401) {
-    throw new Error("bad token");
+    throw new AuthenticationError("bad token");
   }
 
   const data = await response.json();
@@ -69,7 +77,7 @@ export async function addTrackToFavorite(id) {
 
 export async function deleteFromFav(id) {
   const response = await fetch(
-    `https://painassasin.online/catalog/track/${id}/favorite/`,
+    `https://skypro-music-api.skyeng.tech/catalog/track/${id}/favorite/`,
     {
       method: "DELETE",
       headers: {
@@ -82,28 +90,32 @@ export async function deleteFromFav(id) {
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 401) {
-    throw new Error("bad token");
+    throw new AuthenticationError("bad token");
   }
+
   const data = await response.json();
   return data;
 }
+
 export async function registerUser(email, password) {
-  const response = await fetch("https://painassasin.online/user/signup/", {
-    method: "POST",
-    body: JSON.stringify({
-      email: `${email}`,
-      password: `${password}`,
-      username: `${email}`,
-    }),
-    headers: {
- 
-      "content-type": "application/json",
-    },
-  });
+  const response = await fetch(
+    "https://skypro-music-api.skyeng.tech/user/signup/",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email: `${email}`,
+        password: `${password}`,
+        username: `${email}`,
+      }),
+      headers: {
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+        "content-type": "application/json",
+      },
+    }
+  );
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 400) {
-    console.log(response.status);
     const data = await response.json();
     if (data.username) {
       throw new Error(`${data.username}`);
@@ -116,21 +128,23 @@ export async function registerUser(email, password) {
 }
 
 export async function loginUser(email, password) {
-  const response = await fetch("https://painassasin.online/user/login/", {
-    method: "POST",
-    body: JSON.stringify({
-      email: `${email}`,
-      password: `${password}`,
-    }),
-    headers: {
-      
-      "content-type": "application/json",
-    },
-  });
+  const response = await fetch(
+    "https://skypro-music-api.skyeng.tech/user/login/",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email: `${email}`,
+        password: `${password}`,
+      }),
+      headers: {
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+        "content-type": "application/json",
+      },
+    }
+  );
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 401) {
-    console.log(response.status);
     const data = await response.json();
     throw new Error(`${data.detail}`);
   }
@@ -140,21 +154,25 @@ export async function loginUser(email, password) {
 }
 
 export async function getToken(email, password) {
-  const response = await fetch("https://painassasin.online/user/token/", {
-    method: "POST",
-    body: JSON.stringify({
-      email: `${email}`,
-      password: `${password}`,
-    }),
-    headers: {
-      
-      "content-type": "application/json",
-    },
-  });
+  const response = await fetch(
+    "https://skypro-music-api.skyeng.tech/user/token/",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email: `${email}`,
+        password: `${password}`,
+      }),
+      headers: {
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+        "content-type": "application/json",
+      },
+    }
+  );
+
   if (response.status === 500) {
     throw new Error("Сервер сломался");
   } else if (response.status === 401) {
-    throw new Error("bad token");
+    throw new AuthenticationError("bad token");
   }
 
   const data = await response.json();
@@ -162,16 +180,15 @@ export async function getToken(email, password) {
 }
 
 export async function updateToken(token) {
-  console.log("token " + token);
   const response = await fetch(
-    "https://painassasin.online/user/token/refresh/",
+    "https://skypro-music-api.skyeng.tech/user/token/refresh/",
     {
       method: "POST",
       body: JSON.stringify({
         refresh: `${token}`,
       }),
       headers: {
-       
+        // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
         "content-type": "application/json",
       },
     }
@@ -180,4 +197,3 @@ export async function updateToken(token) {
   const data = await response.json();
   return data;
 }
-

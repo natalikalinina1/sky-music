@@ -81,13 +81,26 @@ export const CenterblockFilter = styled.div`
 `;
 
 export const FilterOps = styled.div`
-  margin-bottom: 8px;
-  :hover {
-    color: #b672ff;
-    text-decoration: underline;
-  }
-`;
 
+margin-bottom: 18px;
+:hover {
+  color: #b672ff;
+  text-decoration:underline;
+}
+color: ${(props) => (props.selected ? "#b672ff" : "#ffffff")};
+
+`;
 export const FilterOpsRadio = styled.input`
   display: none;
+`;
+export const SelectedCategory = styled.div`
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  background-color: #ad61ff;
+  color: white;
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  text-align: center;
 `;

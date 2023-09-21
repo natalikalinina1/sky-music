@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux";
 import {
   skipNextTrack,
   skipPrevTrack,
-  skipRandomTrack,
+  skipRandomTrack
 } from "../../functionsReducer/createSlice/currentTrack";
 import { setPlayingStatus } from "../../functionsReducer/createSlice/playingStatus";
-
+import { setLikedStatus, setDislikedStatus } from "../../functionsReducer/createSlice/likedStatus";
+import { addTrackToFavorite, deleteFromFav, updateToken } from "../../api";
+import { setActionStatus } from "../../functionsReducer/createSlice/actionStatus";
 
 function Player({
   loaded,
@@ -19,14 +21,60 @@ function Player({
   loopOn,
   setLoopOn,
   currentVolume,
-  setCurrentVolume,
+  setCurrentVolume
 }) {
   const currentTrack = useSelector((state) => state.currentTrack.value);
-  const dispatch = useDispatch();
   const tracks = useSelector((state) => state.currentAlbum.value.playerTracks);
+  const dispatch = useDispatch();
   const progressRef = useRef(null);
   const [mixed, setMixed] = useState(false);
   const isPlaying = useSelector((state) => state.playingStatus.value);
+  const likedStatus = useSelector((state) => state.likedStatus.value);
+  const isClicked = useSelector((state) => state.actionStatus.value);
+
+  const setLiked = () => {
+    if (String(likedStatus.disliked) === String(currentTrack.id)) {
+      dispatch(setDislikedStatus(""));
+    }
+    dispatch(setLikedStatus(currentTrack.id));
+    addTrackToFavorite(currentTrack.id)
+      .then(() => {
+        dispatch(setActionStatus(!isClicked));
+      })
+      .catch((err) => {
+        updateToken(`${JSON.parse(localStorage.getItem("refreshToken"))}`).then(
+          (data) => {
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(data));
+            addTrackToFavorite(currentTrack.id).then(() => {
+              dispatch(setActionStatus(!isClicked));
+            });
+          }
+        );
+      });
+  };
+
+  const setDisliked = () => {
+    if (String(likedStatus.liked) === String(currentTrack.id)) {
+      dispatch(setLikedStatus(""));
+    }
+    dispatch(setDislikedStatus(currentTrack.id));
+    deleteFromFav(currentTrack.id)
+      .then(() => {
+        dispatch(setActionStatus(!isClicked));
+      })
+      .catch((err) => {
+        updateToken(`${JSON.parse(localStorage.getItem("refreshToken"))}`).then(
+          (data) => {
+            localStorage.removeItem("token");
+            localStorage.setItem("token", JSON.stringify(data));
+            deleteFromFav(currentTrack.id).then(() => {
+              dispatch(setActionStatus(!isClicked));
+            });
+          }
+        );
+      });
+  };
 
   const PlayPause = () => {
     dispatch(setPlayingStatus(!isPlaying));
@@ -143,6 +191,7 @@ function Player({
 
                 <S.PlayerTrackPlay>
                   <S.TrackPlayContain>
+                 
                     <S.TrackPlayImage>
                       {loaded && (
                         <S.TrackPlaySvg alt="music">
@@ -165,6 +214,18 @@ function Player({
                       )}
                     </S.TrackPlayAlbum>
                   </S.TrackPlayContain>
+                  <S.TrackPlayLikeDis>
+                    <S.TrackPlayLike onClick={setLiked}>
+                      <S.TrackPlayLikeSvg alt="like">
+                        <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
+                      </S.TrackPlayLikeSvg>
+                    </S.TrackPlayLike>
+                    <S.TrackPlayDislike onClick={setDisliked}>
+                      <S.TrackPlayDislikeSvg alt="dislike">
+                        <use xlinkHref="/img/icon/sprite.svg#icon-dislike"></use>
+                      </S.TrackPlayDislikeSvg>
+                    </S.TrackPlayDislike>
+                  </S.TrackPlayLikeDis>
                 </S.PlayerTrackPlay>
               </S.BarPlayer>
               <S.BarVolumeBlock>
@@ -194,6 +255,6 @@ function Player({
       </S.Bar>
     </div>
   );
-}
+                    }
 
 export default Player;

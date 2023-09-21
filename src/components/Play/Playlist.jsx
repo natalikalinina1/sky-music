@@ -1,8 +1,11 @@
 
 import PlayItem from "./PlayItem";
 import * as S from "./style.Play";
-import React from "react";
-import { useSelector } from "react-redux";
+
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import {setCurrentAlbumPlayer,setFilteredAlbum } from "../../functionsReducer/createSlice/currentAlbum";
 
 export const items = [
   {
@@ -77,40 +80,127 @@ export const items = [
     genre: "Классическая музыка",
     id: 8,
   },
-  {
-    title: "How Deep Is Your Love",
-    author: "Calvin Harris, Disciples",
-    album: "How Deep Is Your Love",
-    year: "2015-09-02",
-    genre: "Электронная музыка",
-    duration_in_seconds: "3:32",
-    id: 9,
-  },
-  {
-    title: "Morena",
-    author: "Tom Boxer",
-    album: "Soundz Made in Romania",
-    duration_in_seconds: "3:36",
-    year: "2015-01-13",
-    genre: "Электронная музыка",
-    id: 10,
-  },
-  {
-    title: "",
-    author: "",
-    album: "",
-    duration_in_seconds: "",
-    id: 11,
-  },
 ];
 
-function Playlist({
-  loaded,
-  setdisplayed,
-  error,
-  loading,
-}) {
+function Playlist({ loaded, setdisplayed, error, loading, findWord }) {
   const tracks = useSelector((state) => state.currentAlbum.value.tracks);
+  const unfilteredTracks = useSelector(
+    (state) => state.currentAlbum.value.unfilteredTracks
+  );
+  const dispatch = useDispatch();
+  const filteredAuthors = useSelector(
+    (state) => state.filterAuthor.value.authors
+  );
+  const filteredCategory = useSelector((state) => state.filterCategory.value.genres);
+  const sortManner = useSelector((state) => state.sortTracks.value.sortManner);
+  const compareNumericUp = (a, b) => {
+   
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) >
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return 1;
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) ===
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return 0;
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) <
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return -1;
+  };
+
+  const compareNumericDown = (a, b) => {
+
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) >
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return -1;
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) ===
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return 0;
+    if (
+      Number(String(a.release_date).split("").slice(0, 4).join("")) <
+      Number(String(b.release_date).split("").slice(0, 4).join(""))
+    )
+      return 1;
+  };
+
+  const sortFunc = () => {
+    if (Number(sortManner) === 2) {
+      return compareNumericDown;
+    } else if (Number(sortManner) === 3) {
+      return compareNumericUp;
+    }
+  };
+
+  useEffect(() => {
+    let filteredTracks = unfilteredTracks;
+    if (unfilteredTracks) {
+      if (Boolean(sortManner)) {
+        filteredTracks = [...unfilteredTracks]
+          .sort(sortFunc())
+          .filter((val) => {
+            if (findWord === "") {
+              return val;
+            } else if (
+              val.name.toLowerCase().includes(findWord.toLowerCase())
+            ) {
+              return val;
+            }
+          })
+          .filter((val) => {
+            if (filteredAuthors.length <= 0) {
+              return val;
+            } else if (filteredAuthors.includes(val.author)) {
+              return val;
+            }
+          })
+          .filter((val) => {
+            if (filteredCategory.length <= 0) {
+              return val;
+            } else if (filteredCategory.includes(val.genre)) {
+              return val;
+            }
+          });
+      } else {
+     
+        filteredTracks = unfilteredTracks
+          .filter((val) => {
+            if (findWord === "") {
+              return val;
+            } else if (
+              val.name.toLowerCase().includes(findWord.toLowerCase())
+            ) {
+              return val;
+            }
+          })
+          .filter((val) => {
+            if (filteredAuthors.length <= 0) {
+              return val;
+            } else if (filteredAuthors.includes(val.author)) {
+              return val;
+            }
+          })
+          .filter((val) => {
+            if (filteredCategory.length <= 0) {
+              return val;
+            } else if (filteredCategory.includes(val.genre)) {
+              return val;
+            }
+          });
+      }
+  
+      dispatch(setFilteredAlbum(filteredTracks));
+      dispatch(setCurrentAlbumPlayer(filteredTracks));
+    }
+  }, [sortManner, findWord, filteredAuthors, filteredCategory]);
+
   return (
     <>
       {error && (
@@ -120,47 +210,43 @@ function Playlist({
       )}
       {!error && (
         <S.ContentPlaylist>
-        {!loading ? (
-            <div>
-              {tracks
-                ? tracks.map(
-                    ({
-                      id,
-                      name,
-                      author,
-                      album,
-                      duration_in_seconds,
-                      track_file,
-                      stared_user,
-                    }) => (
-                      <PlayItem
-                        key={id}
-                        id={id}
-                        title={name}
-                        author={author}
-                        album={album}
-                        duration_in_seconds={duration_in_seconds}
-                        loaded={loaded}
-                        setdisplayed={setdisplayed}
-                        url={track_file}
-                        likes={stared_user}
-                      />
-                    )
-                  )
-                : items.map(({ id, title, author, album, duration_in_seconds }) => (
+          <div>
+            {!loading
+              ? tracks.map(
+                  ({
+                    id,
+                    name,
+                    author,
+                    album,
+                    duration_in_seconds,
+                    track_file,
+                    stared_user,
+                  }) => (
                     <PlayItem
                       key={id}
-                      title={title}
+                      id={id}
+                      title={name}
                       author={author}
                       album={album}
                       duration_in_seconds={duration_in_seconds}
                       loaded={loaded}
+                      setdisplayed={setdisplayed}
+                      url={track_file}
+                      likes={stared_user}
                     />
-                  ))}{" "}
-            </div>
-          ) : (
-            <p>Loading...</p>
-          )}
+                  )
+                )
+              : items.map(({ id, title, author, album, duration_in_seconds }) => (
+                  <PlayItem
+                    key={id}
+                    title={title}
+                    author={author}
+                    album={album}
+                    duration_in_seconds={duration_in_seconds}
+                    loaded={!loading}
+                  />
+                ))}{" "}
+          </div>
         </S.ContentPlaylist>
       )}
     </>

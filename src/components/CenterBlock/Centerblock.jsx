@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Playlist from "../Play/Playlist";
 import Filter from "../Filter/Filter";
 import * as S from "./style.CenterBlock";
@@ -12,6 +12,7 @@ function Centerblock({
   loading,
 }) {
   const currentAlbum = useSelector((state) => state.currentAlbum.value.name);
+  const [findWord, setFindWord] = useState("");
   return (
     
     <S.MainCenterblock>
@@ -19,12 +20,27 @@ function Centerblock({
         <S.SearchSvg>
           <use xlinkHref="/img/icon/sprite.svg#icon-search"></use>
         </S.SearchSvg>
-        <S.SearchText type="search" placeholder="Поиск" name="search" />
+        <S.SearchText
+          type="search"
+          placeholder="Поиск"
+          name="search"
+          onChange={(event) => setFindWord(event.target.value)}
+        />
       </S.CenterblockSearch>
       <S.CenterblockHeading>
-        {currentAlbum === "favourites" ? "Мои треки" : "Треки"}
+      {currentAlbum === "favourites"
+          ? "Мои треки"
+          : currentAlbum === "main"
+          ? "Треки"
+          : currentAlbum === "category1"
+          ? "Классическая музыка"
+          : currentAlbum === "category2"
+          ? "Электронная музыка"
+          : currentAlbum === "category3"
+          ? "Рок музыка"
+          : "Мои треки"}
       </S.CenterblockHeading>
-      {currentAlbum === "favourites" ? "" : <Filter />}
+      {currentAlbum === "main" ? <Filter /> : ""}
       <S.CenterblockContent>
         <S.ContentTitle>
           <S.PlaylistTitle>Трек</S.PlaylistTitle>
@@ -41,6 +57,8 @@ function Centerblock({
           setdisplayed={setdisplayed}
           error={error}
           loading={loading}
+          findWord={findWord}
+          setFindWord={setFindWord}
         />
       </S.CenterblockContent>
     </S.MainCenterblock>

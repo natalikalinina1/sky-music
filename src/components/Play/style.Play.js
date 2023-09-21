@@ -105,7 +105,7 @@ export const TrackTitleSpan = styled.span`
 `;
 
 export const TrackAuthor = styled.div`
-  width: ${(props) => (!props.loaded ? "321px" : "none")};
+  width: ${(props) => (!props.loaded ? "160px" : "160px")};
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -133,20 +133,11 @@ export const TrackAuthorLink = styled.a`
 
 export const TrackAlbum = styled.div`
   width: 368px;
-  width: ${(props) => (!props.loaded ? "245px" : "none")};
+  width: ${(props) => (!props.loaded ? "160px" : "160px")};
   background-color: ${(props) => (!props.loaded ? "#313131" : "transparent")};
   height: ${(props) => (!props.loaded ? "14px" : "none")};
-  @media (max-width: 1430px) {
-    width: 140px;
-  }
+  
 
-width: none;
-background-color: transparent;
-height: none;
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
 `;
 
 export const TrackAlbumLink = styled.a`
@@ -176,4 +167,7 @@ export const TrackTimeText = styled.span`
   line-height: 24px;
   text-align: right;
   color: #696969;
+`;
+export const TrackTimeBlock = styled.div`
+  width: 160px;
 `;

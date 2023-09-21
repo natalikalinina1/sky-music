@@ -1,7 +1,7 @@
 import React from "react";
-import { items } from "../Play/Playlist";
 import * as S from "./style.Filter";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setSortManner } from "../../functionsReducer/createSlice/sortTracks";
 
 function FilterItemYear({
   yearDisplayed,
@@ -9,18 +9,19 @@ function FilterItemYear({
   setSingerDisplayed,
   setCategoryDisplayed,
 }) {
-  let itemsFiltered = [];
-  for (let i = 0; i < items.length; i++) {
-    if (!itemsFiltered.includes(items[i].year)) {
-      itemsFiltered.push(items[i].year);
-    } else {
-      i++;
-    }
-  }
+  const currentTracks = useSelector(
+    (state) => state.currentAlbum.value.unfilteredTracks
+  );
+  const sortManner = useSelector((state) => state.sortTracks.value.sortManner);
+  const dispatch = useDispatch();
 
+  const setSorted = (id) => {
+    dispatch(setSortManner(id));
+  };
   return (
     <S.FilterItem>
       <S.FilterButton
+      
         onClick={() => {
           setYearDisplayed(!yearDisplayed);
           setSingerDisplayed(false);
@@ -31,15 +32,41 @@ function FilterItemYear({
       >
         году выпуска
       </S.FilterButton>
+      {currentTracks ? (
+        <>
+
       {yearDisplayed && (
         <S.FilterContainer>
-          {itemsFiltered.map((item, index) => (
-            <S.FilterOps>
-              <S.FilterOpsRadio type="radio" id={index} name="category" />
-              <label htmlFor={index}>{item}</label>
+            <S.FilterOps key={1} selected={sortManner === ""}>
+              <S.FilterOpsRadio type="radio"
+                  id={1}
+                  name="category"
+                  onClick={() => setSorted("")}
+                />
+              <label htmlFor={1}>По умолчанию</label>
             </S.FilterOps>
-          ))}
-        </S.FilterContainer>
+            <S.FilterOps key={2} selected={sortManner === 2}>
+              <S.FilterOpsRadio type="radio"
+                  id={2}
+                  name="category"
+                  onClick={() => setSorted(2)}
+                />
+              <label htmlFor={2}>Сначала Новые</label>
+            </S.FilterOps>
+            <S.FilterOps key={3} selected={sortManner === 3}>
+              <S.FilterOpsRadio type="radio"
+                  id={3}
+                  name="category"
+                  onClick={() => setSorted(3)}
+                />
+              <label htmlFor={3}>Сначала Старые</label>
+            </S.FilterOps>
+            </S.FilterContainer>
+          )}
+          </>
+      
+      ) : (
+        ""
       )}
     </S.FilterItem>
   );
