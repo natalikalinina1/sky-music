@@ -10,6 +10,7 @@ import { addTrackToFavorite, deleteFromFav, getFavoriteTracks, updateToken } fro
 import { setCurrentAlbumPlayer } from "../../functionsReducer/createSlice/currentAlbum";
 import { useEffect } from "react";
 import { useState } from "react";
+
 function PlayItem({
   id,
   title,
@@ -27,6 +28,7 @@ function PlayItem({
   const isplaying = useSelector((state) => state.playingStatus.value);
   const isClicked = useSelector((state) => state.actionStatus.value);
   const tracks = useSelector((state) => state.currentAlbum.value.tracks);
+  const likedId = useSelector((state) => state.likedStatus.value);
   const dispatch = useDispatch();
   const [liked, setLiked] = useState(false);
   const displayedBar = () => {
@@ -55,12 +57,17 @@ function PlayItem({
             x.username === JSON.parse(localStorage.getItem("user")).username
         )
       );
-      console.log(found);
       setLiked(found);
     }
   }, []);
 
-  useEffect(() => {}, [liked]);
+  useEffect(() => {
+    if (likedId.liked === id) {
+      setLiked(true);
+    } else if (likedId.disliked === id) {
+      setLiked(false);
+    }
+  }, [likedId]);
 
   const manageLikedTrack = (presentId) => {
     if (presentId) {
@@ -165,7 +172,7 @@ function PlayItem({
               <S.TrackAlbumLink onClick={displayedBar}>{album}</S.TrackAlbumLink>
             )}
           </S.TrackAlbum>
-          <div>
+          <S.TrackTimeBlock>
             {loaded && (
               <S.TrackTimeSvg onClick={toggleLike} liked={liked} alt="time">
                 <use xlinkHref="/img/icon/sprite.svg#icon-like"></use>
@@ -176,11 +183,11 @@ function PlayItem({
                 {  countTrackTime(duration_in_seconds)}
               </S.TrackTimeText>
             )}
-          </div>
+         </S.TrackTimeBlock>
         </S.PlaylistTrack>
       </S.PlaylistItem>
     </>
   );
 }
 
-export default PlayItem;
+export default PlayItem

@@ -118,11 +118,13 @@ fill: transparent;
 stroke: #696969;
     width: 12px;
     height: 12px;
+    margin-left:-50px   
 `;
 
 export const ContentTitle = styled.div`
 display: grid;
-grid-template-columns: 7.5fr 5.4fr 4.08fr 1fr;
+grid-template-columns: 7.8fr 3.5fr 5fr 1fr;
+
 margin-bottom: 24px;
 `;
 
